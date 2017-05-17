@@ -1,0 +1,27 @@
+{
+  "name": "lifterlms-lib-tasks",
+  "version": "1.0.0",
+  "description": "gulp tasks and node utilities for LifterLMS and LifterLMS add-on development",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gocodebox/lifterlms-lib-tasks.git"
+  },
+  "keywords": [
+    "lifterlms"
+  ],
+  "author": "Thomas Patrick Levy <thomas@lifterlms.com>",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/gocodebox/lifterlms-lib-tasks/issues"
+  },
+  "homepage": "https://github.com/gocodebox/lifterlms-lib-tasks#readme",
+  "dependencies": {
+    "gulp-sort": "^2.0.0",
+    "gulp-wp-pot": "^2.0.4",
+    "merge": "^1.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
