@@ -1,5 +1,5 @@
 {
-  "name": "@lifterlms/lifterlms-lib-tasks",
+  "name": "lifterlms-lib-tasks",
   "version": "1.0.0",
   "description": "gulp tasks and node utilities for LifterLMS and LifterLMS add-on development",
   "main": "index.js",

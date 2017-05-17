@@ -18,7 +18,7 @@ module.exports = function( gulp, config ) {
         team: config.pot.team,
       } ) )
 
-      .pipe( gulp.dest( config.pot.dest ) )
+      .pipe( gulp.dest( config.pot.dest + config.pot.domain + '.pot' ) )
 
   } );
 

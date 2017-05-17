@@ -10,7 +10,7 @@ module.exports = function( gulp ) {
     pot: {
       bugReport: 'https://lifterlms.com/my-account/my-tickets',
       domain: package.name,
-      dest: 'i18n/' + package.name + '.pot',
+      dest: 'i18n/',
       lastTranslator: 'Thomas Patrick Levy <thomas@lifterlms.com>',
       team: 'LifterLMS <help@lifterlms.com>',
       package: package.name,
