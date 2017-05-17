@@ -2,7 +2,7 @@ module.exports = function( gulp ) {
 
   var fs = require( 'fs' )
     , merge = require( 'merge' )
-    , package = require( './package.json' )
+    , package = require( '../../package.json' )
     , config
   ;
 
