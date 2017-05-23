@@ -19,7 +19,8 @@
   "dependencies": {
     "gulp-sort": "^2.0.0",
     "gulp-wp-pot": "^2.0.4",
-    "merge": "^1.2.0"
+    "merge": "^1.2.0",
+    "markdown-html": "0.0.8"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
