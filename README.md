@@ -8,6 +8,16 @@ Gulp tasks and Node utilities for LifterLMS and LifterLMS add-on development
 
 `npm install --save-dev lifterlms-lib-tasks`
 
+Create a `gulpfile` in the root of your project (`gulpfile.js`)
+
+The file must contain, at a minimum:
+
+```js
+var gulp = require('gulp');
+
+require( 'lifterlms-lib-tasks' )( gulp );
+```
+
 ## Config File
 
 Create a file named `.llmsconfig` in the root directory of your project
