@@ -36,7 +36,7 @@ Example:
     "package": "my-package-name",
   },
   "scripts": {
-    "src": [ "assets/js/", "!assets/js/*.min.js" ],
+    "src": [ "assets/js/\*\*/\*.js", "!assets/js/\*\*/\*.min.js" ],
     "dest": "assets/js/"
   }
 }

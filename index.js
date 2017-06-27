@@ -16,7 +16,7 @@ module.exports = function( gulp ) {
       package: package.name,
     },
     scripts: {
-      src: [ 'assets/js/', '!assets/js/*.min.js' ],
+      src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js' ],
       dest: 'assets/js/'
     }
   };
