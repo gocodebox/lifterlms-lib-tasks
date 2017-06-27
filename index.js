@@ -14,6 +14,10 @@ module.exports = function( gulp ) {
       lastTranslator: 'Thomas Patrick Levy <thomas@lifterlms.com>',
       team: 'LifterLMS <help@lifterlms.com>',
       package: package.name,
+    },
+    scripts: {
+      src: [ 'assets/js/' ],
+      dest: 'assets/js/'
     }
   };
 
