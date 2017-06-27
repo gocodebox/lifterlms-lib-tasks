@@ -34,6 +34,10 @@ Example:
     "lastTranslator": "Jeffrey Lebowski <thedude@earthlink.com>",
     "team": "Team Name <team@myteam.com>",
     "package": "my-package-name",
+  },
+  "scripts": {
+    "src": [ "assets/js/", "!assets/js/*.min.js" ],
+    "dest": "assets/js/"
   }
 }
 
@@ -42,3 +46,4 @@ Example:
 ## Tasks
 
 + `gulp pot` : Generates a `.pot` file in the configured destination directory (defaults to `i18n`)
++ `gulp scripts` : Minifies unminified scripts in the configured `scripts.src` glob via uglifyjs and saves them with a `.min` suffix in the `scripts.dest` directory

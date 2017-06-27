@@ -16,7 +16,7 @@ module.exports = function( gulp ) {
       package: package.name,
     },
     scripts: {
-      src: [ 'assets/js/' ],
+      src: [ 'assets/js/', '!assets/js/*.min.js' ],
       dest: 'assets/js/'
     }
   };
@@ -27,5 +27,6 @@ module.exports = function( gulp ) {
   }
 
   require( __dirname + '/tasks/pot' )( gulp, config );
+  require( __dirname + '/tasks/scripts' )( gulp, config );
 
 };
