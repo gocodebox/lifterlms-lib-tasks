@@ -28,5 +28,6 @@ module.exports = function( gulp ) {
 
   require( __dirname + '/tasks/pot' )( gulp, config );
   require( __dirname + '/tasks/scripts' )( gulp, config );
+  require( __dirname + '/tasks/watch' )( gulp, config );
 
 };
