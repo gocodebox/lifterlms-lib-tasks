@@ -9,7 +9,6 @@ module.exports = function( gulp, config ) {
   gulp.task( 'scripts', function( cb ) {
 
     pump( [
-
       gulp.src( config.scripts.src ),
         maps.init(),
         uglify(),
@@ -18,8 +17,9 @@ module.exports = function( gulp, config ) {
         } ),
         maps.write(),
         gulp.dest( config.scripts.dest )
-
-    ] );
+      ],
+      cb
+    );
 
   } );
 
