@@ -8,16 +8,17 @@ module.exports = function( gulp, config ) {
 
   gulp.task( 'styles', function( cb ) {
 
-    pump(
-      // unminified
-      [ gulp.src( config.styles.src ),
+    pump( [
+      gulp.src( config.styles.src ),
+        // unminified
+        maps.init(),
         sass( {
           outputStyle: 'nested',
         } ),
-        gulp.dest( config.styles.dest ) ],
+        maps.write(),
+        gulp.dest( config.styles.dest ),
 
-      // minify
-      [ gulp.src( config.styles.src ),
+        // minify
         maps.init(),
         sass( {
           outputStyle: 'compressed',
@@ -26,11 +27,10 @@ module.exports = function( gulp, config ) {
           suffix: '.min',
         } ),
         maps.write(),
-        gulp.dest( config.styles.dest ) ],
+        gulp.dest( config.styles.dest )
+      ],
 
-      // callback
       cb
-
     );
 
   } );
