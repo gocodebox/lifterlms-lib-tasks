@@ -1,8 +1,9 @@
 module.exports = function( gulp, config ) {
 
-  var maps = require( 'gulp-sourcemaps' )
-    , pump = require( 'pump' )
-    , sass = require( 'gulp-sass' )
+  var   maps = require( 'gulp-sourcemaps' )
+    ,   pump = require( 'pump' )
+    , rename = require( 'gulp-rename' )
+    ,   sass = require( 'gulp-sass' )
   ;
 
   gulp.task( 'styles', function( cb ) {
