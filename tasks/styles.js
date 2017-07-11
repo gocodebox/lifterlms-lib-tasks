@@ -7,18 +7,16 @@ module.exports = function( gulp, config ) {
 
   gulp.task( 'styles', function( cb ) {
 
-    pump( [
-
+    pump(
       // unminified
-      gulp.src( config.styles.src ),
+      [ gulp.src( config.styles.src ),
         sass( {
           outputStyle: 'nested',
         } ),
-        gulp.dest( config.styles.dest )
-      ],
+        gulp.dest( config.styles.dest ) ],
 
       // minify
-      gulp.src( config.styles.src ),
+      [ gulp.src( config.styles.src ),
         maps.init(),
         sass( {
           outputStyle: 'compressed',
@@ -27,8 +25,7 @@ module.exports = function( gulp, config ) {
           suffix: '.min',
         } ),
         maps.write(),
-        gulp.dest( config.styles.dest )
-      ],
+        gulp.dest( config.styles.dest ) ],
 
       // callback
       cb
