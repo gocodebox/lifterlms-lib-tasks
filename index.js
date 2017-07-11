@@ -18,6 +18,10 @@ module.exports = function( gulp ) {
     scripts: {
       src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js' ],
       dest: 'assets/js/'
+    },
+    styles: {
+      src: [ 'assets/scss/**/*.scss', '!assets/scss/**/_*.scss' ],
+      dest: 'assets/css/'
     }
   };
 
@@ -26,8 +30,10 @@ module.exports = function( gulp ) {
     config = merge.recursive( config, file );
   }
 
+  require( __dirname + '/tasks/build' )( gulp, config );
   require( __dirname + '/tasks/pot' )( gulp, config );
   require( __dirname + '/tasks/scripts' )( gulp, config );
+  require( __dirname + '/tasks/styles' )( gulp, config );
   require( __dirname + '/tasks/watch' )( gulp, config );
 
 };

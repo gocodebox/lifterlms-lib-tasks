@@ -45,5 +45,8 @@ Example:
 
 ## Tasks
 
++ `gulp build` : Run pot, scripts, and styles tasks.
 + `gulp pot` : Generates a `.pot` file in the configured destination directory (defaults to `i18n`)
 + `gulp scripts` : Minifies unminified scripts in the configured `scripts.src` glob via uglifyjs and saves them with a `.min` suffix in the `scripts.dest` directory
++ `gulp styles` : Compiles `.scss` files to `.css` (both minified and unminified) from the configured `styles.src` glob via gulp-sass and saves in the `styles.dest` directory.
++ `gulp watch` : Watch all configured `src` directories for pot, scripts, and styles tasks and re-run them on change.
