@@ -16,12 +16,14 @@ module.exports = function( gulp ) {
       package: package.name,
     },
     scripts: {
+      dest: 'assets/js/',
       src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js' ],
-      dest: 'assets/js/'
+      src_watch: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js' ],
     },
     styles: {
+      dest: 'assets/css/',
       src: [ 'assets/scss/**/*.scss', '!assets/scss/**/_*.scss' ],
-      dest: 'assets/css/'
+      src_watch: [ 'assets/scss/**/*.scss' ],
     }
   };
 
