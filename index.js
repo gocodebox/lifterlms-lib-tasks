@@ -24,6 +24,10 @@ module.exports = function( gulp ) {
       dest: 'assets/css/',
       src: [ 'assets/scss/**/*.scss', '!assets/scss/**/_*.scss' ],
       watch: [ 'assets/scss/**/*.scss' ],
+    },
+    versioner: {
+      scripts: true,
+      src: [ './*.php', './inc/**/*.php', './includes/**/*.php', './templates/**/*.php', './tests/*.php' ],
     }
   };
 
@@ -36,6 +40,7 @@ module.exports = function( gulp ) {
   require( __dirname + '/tasks/pot' )( gulp, config );
   require( __dirname + '/tasks/scripts' )( gulp, config );
   require( __dirname + '/tasks/styles' )( gulp, config );
+  require( __dirname + '/tasks/versioner' )( gulp, config );
   require( __dirname + '/tasks/watch' )( gulp, config );
 
 };

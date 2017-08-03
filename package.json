@@ -18,6 +18,7 @@
   "homepage": "https://github.com/gocodebox/lifterlms-lib-tasks#readme",
   "dependencies": {
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
     "gulp-sass": "^3.1.0",
     "gulp-sort": "^2.0.0",
     "gulp-sourcemaps": "^2.6.0",
@@ -25,7 +26,8 @@
     "gulp-wp-pot": "^2.0.4",
     "markdown-html": "0.0.8",
     "merge": "^1.2.0",
-    "pump": "^1.0.2"
+    "pump": "^1.0.2",
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
