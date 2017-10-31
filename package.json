@@ -23,7 +23,7 @@
     "gulp-sort": "^2.0.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^3.0.0",
-    "gulp-wp-pot": "^2.0.4",
+    "gulp-wp-pot": "^2.0.6",
     "markdown-html": "0.0.8",
     "merge": "^1.2.0",
     "pump": "^1.0.2",
