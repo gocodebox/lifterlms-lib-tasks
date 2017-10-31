@@ -1,14 +1,13 @@
 module.exports = function( gulp, config ) {
 
-  var checkTextDomain = require( 'gulp-checktextdomain' )
-  ;
+  var checkTextDomain = require( 'gulp-checktextdomain' );
 
   gulp.task( 'textdomain', function() {
 
     gulp.src( [ '*.php', './**/*.php', '!vendor/*' ] )
 
       .pipe( checkTextDomain( {
-        text_domain: config.pot.domain,
+        correct_domain: true,
         keywords: [
           '__:1,2d',
           '_e:1,2d',
@@ -24,7 +23,8 @@ module.exports = function( gulp, config ) {
           '_nx:1,2,4c,5d',
           '_n_noop:1,2,3d',
           '_nx_noop:1,2,3c,4d'
-         ],
+        ],
+        text_domain: config.pot.domain,
       } ) )
 
   } );
