@@ -20,7 +20,7 @@ module.exports = function( gulp, config ) {
     }
 
     return gulp.src( glob, { base: './' } )
-      .pipe( replace( /(\* @(since|version) +\[version\])/g, function( string ) {
+      .pipe( replace( /(\* @(since|version|deprecated) +\[version\])/g, function( string ) {
         return string.replace( '[version]', the_version );
       } ) )
       .pipe( gulp.dest( './' ) );
