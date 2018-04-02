@@ -1,0 +1,38 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Localize JS strings
+ * @since    {{ filesince }}
+ * @version  {{ fileversion }}
+ */
+class {{ classname }} {
+
+	/**
+	 * Constructor
+	 * @since    {{ filesince }}
+	 * @version  {{ filesince }}
+	 */
+	public function __construct() {
+		add_filter( 'lifterlms_js_l10n', array( $this, 'get_strings' ) );
+	}
+
+	/**
+	 * Get strings to be passed to LifterLMS l10n class
+	 * @return   array
+	 * @since    {{ filesince }}
+	 * @version  {{ fileversion }}
+	 */
+	public function get_strings() {
+
+		return array(
+			{{ strings}}
+		);
+
+	}
+
+}
+
+return new {{ classname }}();
