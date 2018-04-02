@@ -28,7 +28,7 @@ class {{ classname }} {
 	public function get_strings() {
 
 		return array(
-			{{ strings}}
+			{{ strings }}
 		);
 
 	}
