@@ -11,6 +11,9 @@ module.exports = function( gulp ) {
       bugReport: 'https://lifterlms.com/my-account/my-tickets',
       domain: package.name,
       dest: 'i18n/',
+      jsClassname: 'LLMS_l10n',
+      jsFilename: 'class-llms-l10n.php',
+      jsSince: '1.0.0',
       lastTranslator: 'Thomas Patrick Levy <thomas@lifterlms.com>',
       team: 'LifterLMS <help@lifterlms.com>',
       package: package.name,
@@ -38,6 +41,7 @@ module.exports = function( gulp ) {
 
   require( __dirname + '/tasks/build' )( gulp, config );
   require( __dirname + '/tasks/pot' )( gulp, config );
+  require( __dirname + '/tasks/pot:js' )( gulp, config );
   require( __dirname + '/tasks/scripts' )( gulp, config );
   require( __dirname + '/tasks/styles' )( gulp, config );
   require( __dirname + '/tasks/textdomain' )( gulp, config );
