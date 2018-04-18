@@ -21,15 +21,16 @@ class {{ classname }} {
 
 	/**
 	 * Get strings to be passed to LifterLMS l10n class
+	 * @param    array  $strings  existing strings from core / 3rd parties
 	 * @return   array
 	 * @since    {{ filesince }}
 	 * @version  {{ fileversion }}
 	 */
-	public function get_strings() {
+	public function get_strings( $strings ) {
 
-		return array(
+		return array_merge( $strings, array(
 			{{ strings }}
-		);
+		) );
 
 	}
 
