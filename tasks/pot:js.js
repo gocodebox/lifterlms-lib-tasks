@@ -9,7 +9,7 @@ module.exports = function( gulp, config ) {
 
       var obj = {},
           counter = 0;
-          patterns = config.scripts.src,
+          patterns = config.pot.jsSrc,
           fileversion = '0.0.0';
 
       patterns.forEach( function ( pattern ) {
