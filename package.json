@@ -32,6 +32,6 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^4.0.0"
   }
 }
