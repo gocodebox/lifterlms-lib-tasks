@@ -19,6 +19,18 @@ module.exports = function( gulp, config ) {
       return;
     }
 
+    if ( config.versioner.main ) {
+      gulp.src( config.versioner.main, { base: './' } )
+        .pipe( replace( / \* Version: (\d+\.\d+\.\d+)/g, function( match, p1, offset, string ) {
+          return match.replace( p1, the_version );
+        } ) )
+        .pipe( replace( / public \$version = '(\d+\.\d+\.\d+)';/g, function( match, p1, offset, string ) {
+          return match.replace( p1, the_version );
+        } ) )
+        .pipe( gulp.dest( './' ) );
+    }
+
+
     return gulp.src( glob, { base: './' } )
       .pipe( replace( /(\* @(since|version|deprecated) +\[version\])/g, function( string ) {
         return string.replace( '[version]', the_version );

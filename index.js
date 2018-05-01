@@ -34,6 +34,7 @@ module.exports = function( gulp ) {
       watch: [ 'assets/scss/**/*.scss' ],
     },
     versioner: {
+      main: package.name + '.php',
       scripts: true,
       src: [ './*.php', './inc/**/*.php', './includes/**/*.php', './templates/**/*.php', './tests/*.php' ],
     }
