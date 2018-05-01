@@ -45,6 +45,7 @@ module.exports = function( gulp ) {
   require( __dirname + '/tasks/pot:js' )( gulp, config );
   require( __dirname + '/tasks/scripts' )( gulp, config );
   require( __dirname + '/tasks/styles' )( gulp, config );
+  require( __dirname + '/tasks/styles:rtl' )( gulp, config );
   require( __dirname + '/tasks/textdomain' )( gulp, config );
   require( __dirname + '/tasks/versioner' )( gulp, config );
   require( __dirname + '/tasks/watch' )( gulp, config );
