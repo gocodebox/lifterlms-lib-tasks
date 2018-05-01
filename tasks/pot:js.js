@@ -68,15 +68,15 @@ module.exports = function( gulp, config ) {
 
       for ( file in obj ) {
 
-          strings += '\r\n\
-\t\t\t/**\r\n\
-\t\t\t * file: ' + file + '\r\n\
-\t\t\t * @since    ' + obj[file].since +'\r\n\
-\t\t\t * @version  ' + obj[file].version +'\r\n\
-\t\t\t */\r\n\
+          strings += '\n\
+\t\t\t/**\n\
+\t\t\t * file: ' + file + '\n\
+\t\t\t * @since    ' + obj[file].since +'\n\
+\t\t\t * @version  ' + obj[file].version +'\n\
+\t\t\t */\n\
 ';
           obj[file].strings.forEach( function( string ) {
-              strings += "\t\t\t'" + string + "' => esc_html__( '" + string + "', '" + config.pot.domain + "' ),\r\n"
+              strings += "\t\t\t'" + string + "' => esc_html__( '" + string + "', '" + config.pot.domain + "' ),\n"
           } );
 
       };
