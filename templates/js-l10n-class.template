@@ -5,6 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Localize JS strings
+ * This file should not be edited directly
+ * It is compiled automatically via the gulp task `js:pot`
+ * See the lifterlms-lib-tasks package for more information
  * @since    {{ filesince }}
  * @version  {{ fileversion }}
  */
