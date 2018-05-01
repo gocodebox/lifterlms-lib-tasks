@@ -24,6 +24,7 @@ module.exports = function( gulp ) {
       watch: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js' ],
     },
     styles: {
+      autoprefixer: 'last 2 versions',
       dest: 'assets/css/',
       src: [ 'assets/scss/**/*.scss', '!assets/scss/**/_*.scss' ],
       watch: [ 'assets/scss/**/*.scss' ],
