@@ -27,6 +27,9 @@ Example:
 ```json
 
 {
+  "build": {
+    "custom": [ "custom_build_task_1", "custom_build_task_2" ]
+  },
   "pot": {
     "bugReport": "https://mybugreports.tld",
     "domain": "my-text-domain",
@@ -41,6 +44,14 @@ Example:
   "scripts": {
     "src": [ "assets/js/\*\*/\*.js", "!assets/js/\*\*/\*.min.js" ],
     "dest": "assets/js/"
+  },
+  "watch": {
+    "custom": [
+      {
+        "glob": [ "path/to/files/**.js" ],
+        "tasks": [ "watch_task_1", "watch_task_2" ]
+      }
+    ],
   }
 }
 
