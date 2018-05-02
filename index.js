@@ -24,8 +24,8 @@ module.exports = function( gulp ) {
     },
     scripts: {
       dest: 'assets/js/',
-      src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js' ],
-      watch: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js' ],
+      src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
+      watch: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
     },
     styles: {
       autoprefixer: 'last 2 versions',
@@ -37,7 +37,10 @@ module.exports = function( gulp ) {
       main: package.name + '.php',
       scripts: true,
       src: [ './*.php', './inc/**/*.php', './includes/**/*.php', './templates/**/*.php', './tests/*.php' ],
-    }
+    },
+    watch: {
+      custom: [],
+    },
   };
 
   if ( fs.existsSync( './.llmsconfig' ) ) {
