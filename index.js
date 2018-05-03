@@ -10,6 +10,9 @@ module.exports = function( gulp ) {
     build: {
       custom: [],
     },
+    dist: {
+      tasks: [ 'build', 'zip' ],
+    },
     pot: {
       bugReport: 'https://lifterlms.com/my-account/my-tickets',
       domain: package.name,
@@ -41,6 +44,23 @@ module.exports = function( gulp ) {
     watch: {
       custom: [],
     },
+    zip: {
+      composer: false,
+      dest: 'dist/',
+      name: package.name,
+      src: {
+        default: [
+          './**/*.*',
+          '!./assets/scss/**',
+          '!./deploy/**', '!./dist/**', '!./tmp/**', '!./gulpfile.js/', '!./gulpfile.js/**/*.*', '!./node_modules/**', '!./tests/**',
+          '!./**/*.yml',
+          '!./**/composer.json', '!./**/composer.lock',
+          '!./**/package.json', '!./**/package-lock.json',
+          '!./*.xml',
+        ],
+        custom: [],
+      },
+    }
   };
 
   if ( fs.existsSync( './.llmsconfig' ) ) {
@@ -53,6 +73,7 @@ module.exports = function( gulp ) {
   }
 
   require( __dirname + '/tasks/build' )( gulp, config );
+  require( __dirname + '/tasks/dist' )( gulp, config );
   require( __dirname + '/tasks/pot' )( gulp, config );
   require( __dirname + '/tasks/pot:js' )( gulp, config );
   require( __dirname + '/tasks/scripts' )( gulp, config );
@@ -61,5 +82,6 @@ module.exports = function( gulp ) {
   require( __dirname + '/tasks/textdomain' )( gulp, config );
   require( __dirname + '/tasks/versioner' )( gulp, config );
   require( __dirname + '/tasks/watch' )( gulp, config );
+  require( __dirname + '/tasks/zip' )( gulp, config );
 
 };

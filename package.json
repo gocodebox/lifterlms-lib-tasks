@@ -19,6 +19,7 @@
   "dependencies": {
     "gulp-autoprefixer": "^5.0.0",
     "gulp-checktextdomain": "^2.1.1",
+    "gulp-composer": "^0.4.5",
     "gulp-include": "^2.3.1",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
@@ -27,6 +28,7 @@
     "gulp-sort": "^2.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
+    "gulp-vinyl-zip": "^2.1.0",
     "gulp-wp-pot": "^2.3.0",
     "markdown-html": "0.0.8",
     "merge": "^1.2.0",
