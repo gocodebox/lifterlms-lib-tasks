@@ -1,6 +1,6 @@
 {
   "name": "lifterlms-lib-tasks",
-  "version": "1.9.1",
+  "version": "1.10.0",
   "description": "gulp tasks and node utilities for LifterLMS and LifterLMS add-on development",
   "main": "index.js",
   "repository": {
