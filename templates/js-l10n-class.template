@@ -32,7 +32,7 @@ class {{ classname }} {
 	public function get_strings( $strings ) {
 
 		return array_merge( $strings, array(
-			{{ strings }}
+{{ strings }}
 		) );
 
 	}
