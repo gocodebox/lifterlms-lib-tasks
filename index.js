@@ -3,10 +3,12 @@ module.exports = function( gulp ) {
   var fs = require( 'fs' )
     , merge = require( 'merge' )
     , package = require( process.cwd() + '/package.json' )
+    , argv = require( 'yargs' ).argv
     , config
   ;
 
   config = {
+    _package: package,
     build: {
       custom: [],
     },
@@ -25,6 +27,27 @@ module.exports = function( gulp ) {
       team: 'LifterLMS <help@lifterlms.com>',
       package: package.name,
     },
+    publish: {
+      github: {
+        org: 'gocodebox',
+        repo: package.name,
+        url: package.repository.url,
+      },
+      img: 'https://cdn2.lifterlms.com/brand-assets/lifterlms-logo-alt_color-on-ffffff.png',
+      slug: package.name,
+      slack: {
+        channel: '#general',
+      },
+      svn: {
+        base: 'http://svn.wp-plugins.org/',
+        slug: package.name,
+      },
+      lifterlms: {
+        pot: true,
+        slug: package.name,
+      },
+      title: package.name,
+    },
     scripts: {
       dest: 'assets/js/',
       src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
@@ -37,6 +60,7 @@ module.exports = function( gulp ) {
       watch: [ 'assets/scss/**/*.scss' ],
     },
     versioner: {
+      custom: [],
       main: package.name + '.php',
       scripts: true,
       src: [ './*.php', './inc/**/*.php', './includes/**/*.php', './templates/**/*.php', './tests/*.php' ],
@@ -72,16 +96,17 @@ module.exports = function( gulp ) {
     config.pot.jsSrc = config.scripts.src;
   }
 
-  require( __dirname + '/tasks/build' )( gulp, config );
-  require( __dirname + '/tasks/dist' )( gulp, config );
-  require( __dirname + '/tasks/pot' )( gulp, config );
-  require( __dirname + '/tasks/pot:js' )( gulp, config );
-  require( __dirname + '/tasks/scripts' )( gulp, config );
-  require( __dirname + '/tasks/styles' )( gulp, config );
-  require( __dirname + '/tasks/styles:rtl' )( gulp, config );
-  require( __dirname + '/tasks/textdomain' )( gulp, config );
-  require( __dirname + '/tasks/versioner' )( gulp, config );
-  require( __dirname + '/tasks/watch' )( gulp, config );
-  require( __dirname + '/tasks/zip' )( gulp, config );
+  require( __dirname + '/tasks/build' )( gulp, config, argv );
+  require( __dirname + '/tasks/dist' )( gulp, config, argv );
+  require( __dirname + '/tasks/pot' )( gulp, config, argv );
+  require( __dirname + '/tasks/pot:js' )( gulp, config, argv );
+  require( __dirname + '/tasks/publish' )( gulp, config, argv );
+  require( __dirname + '/tasks/scripts' )( gulp, config, argv );
+  require( __dirname + '/tasks/styles' )( gulp, config, argv );
+  require( __dirname + '/tasks/styles:rtl' )( gulp, config, argv );
+  require( __dirname + '/tasks/textdomain' )( gulp, config, argv );
+  require( __dirname + '/tasks/versioner' )( gulp, config, argv );
+  require( __dirname + '/tasks/watch' )( gulp, config, argv );
+  require( __dirname + '/tasks/zip' )( gulp, config, argv );
 
 };
