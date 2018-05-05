@@ -2,6 +2,7 @@ module.exports = function( gulp, config ) {
 
   var   replace = require( 'gulp-replace' )
       , argv    = require( 'yargs' ).argv
+      ,  filter = require( 'gulp-filter' )
       , fs      = require( 'fs' )
       , gutil   = require( 'gulp-util' )
       , run     = require( 'gulp-run' )
@@ -22,26 +23,27 @@ module.exports = function( gulp, config ) {
       return;
     }
 
-    // updates the main plugin file
-    if ( config.versioner.main ) {
-      gulp.src( config.versioner.main, { base: './' } )
-        .pipe( replace( / \* Version: (\d+\.\d+\.\d+)/g, function( match, p1, offset, string ) {
-          return match.replace( p1, the_version );
-        } ) )
-        .pipe( replace( / public \$version = '(\d+\.\d+\.\d+)';/g, function( match, p1, offset, string ) {
-          return match.replace( p1, the_version );
-        } ) )
-        .pipe( gulp.dest( './' ) );
-    }
-
     // updates the package file
-    run( 'npm version --no-git-tag-version ' + the_version );
+    run( 'npm version --no-git-tag-version ' + the_version ).exec();
 
-    // update everything else
+    var main_glob = config.versioner.main ? [ config.versioner.main ] : [ '**' ],
+        main_filter = filter( main_glob, { restore: true } );
+
     return gulp.src( glob, { base: './' } )
+      // version all applicable files
       .pipe( replace( /(\* @(since|version|deprecated) +\[version\])/g, function( string ) {
         return string.replace( '[version]', the_version );
       } ) )
+      // filter to the main plugin file & perform more replacements there
+      .pipe( main_filter )
+      .pipe( replace( / \* Version: (\d+\.\d+\.\d+)/g, function( match, p1, offset, string ) {
+        return match.replace( p1, the_version );
+      } ) )
+      .pipe( replace( /public \$version = '(\d+\.\d+\.\d+)';/g, function( match, p1, offset, string ) {
+        return match.replace( p1, the_version );
+      } ) )
+      // restore all files filtered out
+      .pipe( main_filter.restore )
       .pipe( gulp.dest( './' ) );
 
   } );

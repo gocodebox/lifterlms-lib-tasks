@@ -24,6 +24,15 @@ function inquire( opts, cb ) {
     },
     {
       type: 'confirm',
+      name: 'svn',
+      message: 'Create an SVN release?',
+      default: true,
+      when: function( answers ) {
+        return opts.svn;
+      }
+    },
+    {
+      type: 'confirm',
       name: 'aws_upload',
       message: 'Upload Changelog & Distribution Zip to AWS?',
       default: true,

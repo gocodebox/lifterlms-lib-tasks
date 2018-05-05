@@ -7,12 +7,13 @@ module.exports = function( gulp, config, args ) {
     ,        fs = require( 'fs' )
     ,   inquire = require( '../publish/inquire' )
     ,   request = require( 'request' )
+    ,    rimraf = require( 'rimraf' )
     , svnCommit = require( '../publish/svnCommit' )
     ,    upload = require( '../publish/aws' )
   ;
 
   var auth = false,
-      debug = args.debug || true,
+      debug = args.debug || false,
       user_agent = 'lifterlms-lib-tasks-publish/' + config.publish.slug;
 
   function log_err( message ) {
@@ -102,19 +103,19 @@ module.exports = function( gulp, config, args ) {
       return log_err( 'Missing version number! Rerun task with -V 1.0.0' );
     }
 
-    return svnCommit( gulp, config, version, auth, function( err ) {
-      // if ( err ) {
-      //   return log_error( err );
-      // }
-    } );
-
     var opts = {
       aws: ( auth.aws_id && auth.aws_secret && auth.aws_bucket ),
       gh: ( auth.github ),
-      pot: ( config.publish.lifterlms.pot && auth.translate_user && auth.translate_pass )
+      pot: ( config.publish.lifterlms.pot && auth.translate_user && auth.translate_pass ),
+      svn: ( config.publish.svn && auth.svn_user && auth.svn_pass ),
     };
 
     return inquire( opts, function( answers ) {
+
+      // ensure tmp dir exists
+      if ( ! fs.existsSync( './tmp' ) ) {
+        fs.mkdirSync( './tmp' );
+      }
 
       var to_process = [];
 
@@ -125,32 +126,33 @@ module.exports = function( gulp, config, args ) {
        */
       to_process.push( function( resolve, reject ) {
 
-        if ( ! debug && auth.lifterlms ) {
+        if ( ! debug || ! auth.lifterlms ) {
+          return resolve( {} );
+        }
 
-          return request.post( {
-            url: 'https://lifterlms.com/wp-json/llms-api/v2/release',
-            headers: {
-              'User-Agent': user_agent,
-            },
-            body: {
-              apikey: auth.lifterlms,
-              slug: config.publish.slug,
-              version: version,
-            },
-            json: true,
-          }, function( err, res, body ) {
+        return request.post( {
+          url: 'https://lifterlms.com/wp-json/llms-api/v2/release',
+          headers: {
+            'User-Agent': user_agent,
+          },
+          body: {
+            apikey: auth.lifterlms,
+            slug: config.publish.slug,
+            version: version,
+          },
+          json: true,
+        }, function( err, res, body ) {
 
-            if ( err ) {
-              return reject( err );
-            }
+          if ( err ) {
+            return reject( err );
+          }
 
-            return resolve( {
-              message: '*Product*: https://lifterlms.com/product/' + config.publish.lifterlms.slug,
-            } );
-
+          console.log( body );
+          return resolve( {
+            message: '*Product*: https://lifterlms.com/product/' + config.publish.lifterlms.slug,
           } );
 
-        }
+        } );
 
       } );
 
@@ -161,43 +163,43 @@ module.exports = function( gulp, config, args ) {
        */
       to_process.push( function( resolve, reject ) {
 
-        if ( answers.llms_pot ) {
+        if ( ! answers.llms_pot ) {
+          return resolve( {} );
+        }
 
-          return request.post( {
-            url: 'https://translate.lifterlms.com/wp-json/llms-translate/v1/import',
-            auth: {
-              user: auth.translate_user,
-              pass: auth.translate_pass,
-            },
-            headers: {
-              'User-Agent': user_agent,
-            },
-            formData: {
-              originals: fs.createReadStream( config.pot.dest + config.pot.domain + '.pot' ),
-              project: config.pot.domain,
-            },
-          }, function( err, res, body ) {
+        return request.post( {
+          url: 'https://translate.lifterlms.com/wp-json/llms-translate/v1/import',
+          auth: {
+            user: auth.translate_user,
+            pass: auth.translate_pass,
+          },
+          headers: {
+            'User-Agent': user_agent,
+          },
+          formData: {
+            originals: fs.createReadStream( config.pot.dest + config.pot.domain + '.pot' ),
+            project: config.pot.domain,
+          },
+        }, function( err, res, body ) {
 
-            if ( err ) {
-              return reject( err );
+          if ( err ) {
+            return reject( err );
+          }
+
+          body = JSON.parse( body );
+
+          if ( 200 !== res.statusCode ) {
+            if ( body.message ) {
+              return reject( body.message );
             }
+            return reject( body );
+          }
 
-            body = JSON.parse( body );
-
-            if ( 200 !== res.statusCode ) {
-              if ( body.message ) {
-                return reject( body.message );
-              }
-              return reject( body );
-            }
-
-            return resolve( {
-              message: '*Translation Import Results*: ' + body.message + '\n' + '*Translation Project*: https://translate.lifterlms.com/translate/projects/' + config.pot.domain + '/',
-            } );
-
+          return resolve( {
+            message: '*Translation Import Results*: ' + body.message + '\n' + '*Translation Project*: https://translate.lifterlms.com/translate/projects/' + config.pot.domain + '/',
           } );
 
-        }
+        } );
 
       } );
 
@@ -267,7 +269,7 @@ module.exports = function( gulp, config, args ) {
             return reject( err );
           }
 
-          upload( auth, './tmp/changelog.html', 'changelogs/' + config.publish.name + '.html', function( err, data ) {
+          upload( auth, './tmp/changelog.html', 'changelogs/' + config.publish.lifterlms.slug + '.html', function( err, data ) {
             if ( err ) {
               return reject( err );
             }
@@ -318,6 +320,32 @@ module.exports = function( gulp, config, args ) {
 
       } );
 
+      to_process.push( function( resolve, reject ) {
+
+        if ( ! answers.svn ) {
+          return resolve( {} );
+        }
+
+        svnCommit( gulp, config, version, auth, function( err ) {
+
+          if ( err ) {
+            return reject( err );
+          }
+
+          var base_url = 'https://plugins.svn.wordpress.org/' + config.publish.svn.base + '/' + config.publish.svn.slug;
+              msgs = [
+                '*SVN Trunk*: ' + base_url +'/trunk/',
+                '*SVN Tag*: ' + base_url +'/tags/' + version + '/',
+                '*SVN Zip*: https://downloads.wordpress.org/plugin/' + config.publish.svn.slug + '.' + version + '.zip',
+              ];
+
+          return resolve( {
+            message: msgs.join( '\n' ),
+          } );
+
+        } );
+      } );
+
       // Run all the processes
       // Post success / errors
       // on success posts to slack as well
@@ -337,6 +365,7 @@ module.exports = function( gulp, config, args ) {
           }
         } );
 
+        rimraf.sync( './tmp' );
         post_results( msgs );
 
       } ).catch( function( err ) {

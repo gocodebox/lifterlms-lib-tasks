@@ -41,7 +41,6 @@ module.exports = function( gulp, config, version, cb ) {
             // force push
             git.push( 'origin', branch_name, { args: '-f', cwd: tmpdir }, function ( err ) {
               if ( err ) { return cb( err ); }
-
               cb( null, branch_name );
 
             } );

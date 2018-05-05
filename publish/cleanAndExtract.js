@@ -10,7 +10,7 @@ module.exports = function( gulp, config, version, tmpdir, cb ) {
   var zip_name = config.zip.name + '-' + version + '.zip';
 
   // clean the entire branch leaving only the git dir (it'll be empty when we're done hahaha)
-  return globby( [ tmpdir + '*', '!' + tmpdir + '.git' ], { dot: true, onlyFiles: false } ).then( function ( paths ) {
+  globby( [ tmpdir + '*', '!' + tmpdir + '.git' ], { dot: true, onlyFiles: false } ).then( function ( paths ) {
     paths.map( function( item ) {
       rimraf.sync( item );
     } );
