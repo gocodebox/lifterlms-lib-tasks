@@ -12,7 +12,7 @@ function changelog() {
           metadata: true,
         } ),
         template = fs.readFileSync( __dirname + '/../templates/changelog.template', 'utf-8' ).toString(),
-        css = fs.readFileSync( __dirname + '/../node_modules/normalize.css/normalize.css', 'utf-8' ),
+        css = fs.readFileSync( require.resolve( 'normalize.css' ), 'utf-8' ),
         html = converter.makeHtml( raw_log );
 
         template = template.replace( /{{ title }}/g, config.publish.title + ' Changelog' );
