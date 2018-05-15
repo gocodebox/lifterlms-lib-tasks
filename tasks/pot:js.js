@@ -7,6 +7,10 @@ module.exports = function( gulp, config ) {
 
   gulp.task( 'pot:js', function() {
 
+      if ( ! config.pot.js ) {
+        return;
+      }
+
       var obj = {},
           counter = 0;
           patterns = config.pot.jsSrc,

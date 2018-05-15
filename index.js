@@ -19,6 +19,7 @@ module.exports = function( gulp ) {
       bugReport: 'https://lifterlms.com/my-account/my-tickets',
       domain: package.name,
       dest: 'i18n/',
+      js: true,
       jsClassname: 'LLMS_l10n',
       jsFilename: 'class-llms-l10n.php',
       jsSince: '1.0.0',
