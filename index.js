@@ -82,6 +82,7 @@ module.exports = function( gulp ) {
           '!./**/composer.json', '!./**/composer.lock',
           '!./**/package.json', '!./**/package-lock.json',
           '!./*.xml',
+          '!./README.md',
         ],
         custom: [],
       },
