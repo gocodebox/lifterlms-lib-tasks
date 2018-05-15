@@ -295,14 +295,14 @@ module.exports = function( gulp, config, args ) {
           return resolve( {} );
         }
 
-        git( gulp, config, version, function( err, branch_name ) {
+        git( gulp, config, version, function( err ) {
           if ( err ) {
             return reject( err );
           }
 
           gh_release_post( {
             tag_name: version,
-            target_commitish: branch_name,
+            target_commitish: config.publish.github.branch,
             name: 'Version ' + version,
             prerelease: answers.gh_prerelease
           }, function( err, res, body ) {

@@ -30,6 +30,7 @@ module.exports = function( gulp ) {
     },
     publish: {
       github: {
+        branch: 'trunk',
         org: 'gocodebox',
         repo: package.name,
         url: package.repository.url,

@@ -9,8 +9,7 @@ module.exports = function( gulp, config, version, cb ) {
     ,    zip = require( 'gulp-vinyl-zip' )
   ;
 
-  var tmpdir = './tmp/git/',
-      branch_name = 'deploy-' + version;
+  var tmpdir = './tmp/git/';
 
   // clean tmp directory
   rimraf.sync( tmpdir );
@@ -20,7 +19,7 @@ module.exports = function( gulp, config, version, cb ) {
     if ( err ) { return cb( err ); }
 
     // checkout to a new branch
-    git.checkout( branch_name, { args: '-b', cwd: tmpdir }, function ( err ) {
+    git.checkout( config.publish.github.branch, { args: '-b', cwd: tmpdir }, function ( err ) {
       if ( err ) { return cb( err ); }
 
       cleanAndExtract( gulp, config, version, tmpdir, function( err ) {
@@ -39,9 +38,9 @@ module.exports = function( gulp, config, version, cb ) {
             // git.status( { cwd: tmpdir } );
 
             // force push
-            git.push( 'origin', branch_name, { args: '-f', cwd: tmpdir }, function ( err ) {
+            git.push( 'origin', config.publish.github.branch, { args: '-f', cwd: tmpdir }, function ( err ) {
               if ( err ) { return cb( err ); }
-              cb( null, branch_name );
+              cb( null );
 
             } );
 
