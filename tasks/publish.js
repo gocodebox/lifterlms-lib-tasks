@@ -137,7 +137,7 @@ module.exports = function( gulp, config, args ) {
           },
           body: {
             apikey: auth.lifterlms,
-            slug: config.publish.slug,
+            slug: config.publish.github.repo,
             version: version,
           },
           json: true,
