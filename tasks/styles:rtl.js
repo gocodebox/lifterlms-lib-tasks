@@ -6,9 +6,16 @@ module.exports = function( gulp, config ) {
 
   gulp.task( 'styles:rtl', [ 'styles' ], function( cb ) {
 
-    gulp.src( [ config.styles.dest + '**/*.css', '!' + config.styles.dest + '**/*-rtl.css' ] )
+    gulp.src( [ config.styles.dest + '**/*.css', '!' + config.styles.dest + '**/*-rtl*.css' ] )
       .pipe( rtlcss() )
-      .pipe( rename( { suffix: '-rtl' } ) )
+      .pipe( rename( function( path ) {
+        var suffix = '-rtl';
+        if ( -1 !== path.basename.indexOf( '.min' ) ) {
+          path.basename = path.basename.replace( '.min', suffix + '.min' );
+        } else {
+          path.basename += '-rtl';
+        }
+      } ) )
       .pipe( gulp.dest( config.styles.dest ) );
 
   } );
