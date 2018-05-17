@@ -49,6 +49,15 @@ function inquire( opts, cb ) {
         return opts.pot;
       }
     },
+    {
+      type: 'confirm',
+      name: 'llms_make',
+      message: 'Publish release notes to make.lifterlms.com?',
+      default: true,
+      when: function( answers ) {
+        return opts.make;
+      }
+    },
 
   ] ).then( cb );
 

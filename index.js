@@ -45,6 +45,10 @@ module.exports = function( gulp ) {
         slug: package.name,
       },
       lifterlms: {
+        make: {
+          cats: [ 5 ],
+          tags: [],
+        },
         pot: true,
         slug: package.name,
       },

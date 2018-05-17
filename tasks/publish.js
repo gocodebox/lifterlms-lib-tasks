@@ -106,6 +106,7 @@ module.exports = function( gulp, config, args ) {
     var opts = {
       aws: ( auth.aws_id && auth.aws_secret && auth.aws_bucket ),
       gh: ( auth.github ),
+      make: ( config.publish.lifterlms.make && auth.make_user && auth.make_pass ),
       pot: ( config.publish.lifterlms.pot && auth.translate_user && auth.translate_pass ),
       svn: ( config.publish.svn && auth.svn_user && auth.svn_pass ),
     };
@@ -157,7 +158,7 @@ module.exports = function( gulp, config, args ) {
       } );
 
       /**
-       * Update Translation strings at translate.LifterLMS.com
+       * Publish release notes as a blog post at make.lifterlms.com
        * @since    [version]
        * @version  [version]
        */
@@ -344,6 +345,63 @@ module.exports = function( gulp, config, args ) {
           } );
 
         } );
+      } );
+
+      /**
+       * Publish release notes as a blog post at make.lifterlms.com
+       * @since    [version]
+       * @version  [version]
+       */
+      to_process.push( function( resolve, reject ) {
+
+        if ( ! answers.llms_make ) {
+          return resolve( {} );
+        }
+
+        return changelog.getDistNotes( function( notes ) {
+
+          var notes = notes.split( '\n' );
+          notes.splice( 0, 3 );
+          notes = notes.join( '\n' );
+
+          return request.post( {
+            url: 'https://make.lifterlms.com/wp-json/wp/v2/posts',
+            auth: {
+              user: auth.make_user,
+              pass: auth.make_pass,
+            },
+            headers: {
+              'User-Agent': user_agent,
+            },
+            body: {
+              status: debug ? 'draft' : 'publish',
+              title: config.publish.title + ' Version ' + version,
+              content: notes,
+              categories: config.publish.lifterlms.make.cats,
+              tags: config.publish.lifterlms.make.tags,
+            },
+            json: true,
+          }, function( err, res, body ) {
+
+            if ( err ) {
+              return reject( err );
+            }
+
+            if ( -1 === [ 200, 201 ].indexOf( res.statusCode ) ) {
+              if ( body.message ) {
+                return reject( body.message );
+              }
+              return reject( body );
+            }
+
+            return resolve( {
+              message: '*Blog Post*: ' + body.link + '\n',
+            } );
+
+          } );
+        } )
+
+
       } );
 
       // Run all the processes
