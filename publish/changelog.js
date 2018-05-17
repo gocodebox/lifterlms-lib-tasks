@@ -46,7 +46,7 @@ function changelog() {
     } );
 
     // remove everything except first item
-    notes = notes.substring( 0, notes.indexOf( stop ) - 5 );
+    notes = notes.substring( 0, notes.indexOf( stop ) - 3 );
 
     // return it
     return cb( notes );
