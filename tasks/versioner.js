@@ -23,8 +23,10 @@ module.exports = function( gulp, config ) {
       return;
     }
 
-    // updates the package file
-    run( 'npm version --no-git-tag-version ' + the_version ).exec();
+    if ( true !== argv.skip_package ) {
+      // updates the package file
+      run( 'npm version --no-git-tag-version ' + the_version ).exec();
+    }
 
     var main_glob = config.versioner.main ? [ config.versioner.main ] : [ '**' ],
         main_filter = filter( main_glob, { restore: true } );

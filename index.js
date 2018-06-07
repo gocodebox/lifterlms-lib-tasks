@@ -69,7 +69,7 @@ module.exports = function( gulp ) {
       custom: [],
       main: package.name + '.php',
       scripts: true,
-      src: [ './*.php', './inc/**/*.php', './includes/**/*.php', './templates/**/*.php', './tests/*.php' ],
+      src: [ './*.php', './inc/**/*.php', './includes/**/*.php', './templates/**/*.php', './tests/**/*.php' ],
     },
     watch: {
       custom: [],
