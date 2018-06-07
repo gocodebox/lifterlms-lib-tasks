@@ -13,7 +13,7 @@ module.exports = function( gulp ) {
       custom: [],
     },
     dist: {
-      tasks: [ 'build', 'zip' ],
+      tasks: [ 'versioner', 'build', 'zip' ],
     },
     pot: {
       bugReport: 'https://lifterlms.com/my-account/my-tickets',
