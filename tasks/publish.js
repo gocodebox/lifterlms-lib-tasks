@@ -270,7 +270,7 @@ module.exports = function( gulp, config, args ) {
             return reject( err );
           }
 
-          upload( auth, './tmp/changelog.html', 'changelogs/' + config.publish.lifterlms.slug + '.html', function( err, data ) {
+          upload( auth, './tmp/changelog.html', 'changelogs/' + config.publish.slug + '.html', function( err, data ) {
             if ( err ) {
               return reject( err );
             }
