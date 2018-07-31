@@ -37,7 +37,7 @@ function changelog() {
     }
 
     // get the first item in the log
-    notes = notes.replace( /v\d+\.\d+\.\d+ - \d{4}\-\d{2}\-\d{2}/g, function( match ) {
+    notes = notes.replace( /(v\d+\.\d+\.\d+)(\-\D+\.\d+)? - \d{4}\-\d{2}\-\d{2}/g, function( match ) {
       if ( 1 === counter ) {
         stop = match;
       }
