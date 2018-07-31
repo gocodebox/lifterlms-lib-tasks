@@ -333,7 +333,7 @@ module.exports = function( gulp, config, args ) {
             return reject( err );
           }
 
-          var base_url = 'https://plugins.svn.wordpress.org/' + config.publish.svn.base + '/' + config.publish.svn.slug;
+          var base_url = config.publish.svn.base + '/' + config.publish.svn.slug;
               msgs = [
                 '*SVN Trunk*: ' + base_url +'/trunk/',
                 '*SVN Tag*: ' + base_url +'/tags/' + version + '/',
