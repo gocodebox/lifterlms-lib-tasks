@@ -127,7 +127,7 @@ module.exports = function( gulp, config, args ) {
        */
       to_process.push( function( resolve, reject ) {
 
-        if ( debug || ! auth.lifterlms ) {
+        if ( debug || ! auth.lifterlms || answers.gh_prerelease ) {
           return resolve( {} );
         }
 
