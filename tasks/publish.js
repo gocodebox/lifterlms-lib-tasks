@@ -217,7 +217,7 @@ module.exports = function( gulp, config, args ) {
 
         var zipname = config.zip.name + '-' + version + '.zip';
 
-        upload( auth, './' + config.zip.dest + zipname, 'dist/' + config.publish.slug + '/' + zipname, function( err, data ) {
+        upload( auth, './' + config.zip.dest + zipname, 'dist/' + config.publish.slug + '/' + zipname, config.privacy, function( err, data ) {
 
           if ( err ) {
             return reject( err );
@@ -242,7 +242,7 @@ module.exports = function( gulp, config, args ) {
           return resolve( {} );
         }
 
-        upload( auth, './CHANGELOG.md', 'changelogs/' + config.publish.slug + '.md', function( err, data ) {
+        upload( auth, './CHANGELOG.md', 'changelogs/' + config.publish.slug + '.md', 'public', function( err, data ) {
           if ( err ) {
             return reject( err );
           }
@@ -270,7 +270,7 @@ module.exports = function( gulp, config, args ) {
             return reject( err );
           }
 
-          upload( auth, './tmp/changelog.html', 'changelogs/' + config.publish.slug + '.html', function( err, data ) {
+          upload( auth, './tmp/changelog.html', 'changelogs/' + config.publish.slug + '.html', 'public', function( err, data ) {
             if ( err ) {
               return reject( err );
             }

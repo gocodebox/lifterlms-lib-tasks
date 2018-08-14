@@ -52,6 +52,7 @@ module.exports = function( gulp ) {
         pot: true,
         slug: package.name,
       },
+      privacy: 'public',
       title: package.name,
     },
     scripts: {

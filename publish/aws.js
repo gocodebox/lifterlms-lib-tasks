@@ -1,4 +1,4 @@
-module.exports = function( auth, file, name, cb ) {
+module.exports = function( auth, file, name, privacy, cb ) {
 
   var  AWS = require( 'aws-sdk' )
     ,   fs = require( 'fs' )
@@ -17,7 +17,9 @@ module.exports = function( auth, file, name, cb ) {
     if ( err ) { return cb( err ); }
   } );
 
-  var content_type = null;
+  var content_type = null,
+      max_age = 3600; // 1 hour
+
   switch ( path.extname( file ) ) {
     case '.html':
       content_type = 'text/html';
@@ -27,15 +29,27 @@ module.exports = function( auth, file, name, cb ) {
     break;
     case '.zip':
       content_type = 'application/zip';
+      max_age = 86400; // 24 hours
     break;
   }
 
   stream.on( 'open', function() {
+
+    var acl = 'private',
+        cache_control = [ 'max-age=' + max_age, 'no-transform' ];
+
+    if ( 'public' === privacy ) {
+      acl = 'public-read';
+      cache_control.push( 'public' );
+    } else {
+      cache_control.push( 'private' );
+    }
+
     s3.upload( {
-      ACL: 'public-read',
+      ACL: acl,
       Body: stream,
       Bucket: auth.aws_bucket,
-      CacheControl: 'max-age=3600, no-transform, public',
+      CacheControl: cache_control.join( ', ' ),
       ContentType: content_type,
       Key: name,
     }, function( err, data ) {
