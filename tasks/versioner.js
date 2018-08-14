@@ -38,10 +38,10 @@ module.exports = function( gulp, config ) {
       } ) )
       // filter to the main plugin file & perform more replacements there
       .pipe( main_filter )
-      .pipe( replace( / \* Version: (\d+\.\d+\.\d+)/g, function( match, p1, offset, string ) {
+      .pipe( replace( / \* Version: (\d+\.\d+\.\d+)(\-\D+\.\d+)?/g, function( match, p1, offset, string ) {
         return match.replace( p1, the_version );
       } ) )
-      .pipe( replace( /public \$version = '(\d+\.\d+\.\d+)';/g, function( match, p1, offset, string ) {
+      .pipe( replace( /public \$version = '(\d+\.\d+\.\d+)(\-\D+\.\d+)?';/g, function( match, p1, offset, string ) {
         return match.replace( p1, the_version );
       } ) )
       // restore all files filtered out
