@@ -56,7 +56,23 @@ module.exports = function( auth, file, name, privacy, cb ) {
       if ( err ) {
         return cb( err );
       }
-      return cb( null, data );
+
+      if ( 'private' === privacy ) {
+
+        data.dl_url = s3.getSignedUrl( 'getObject', {
+          Bucket: auth.aws_bucket,
+          Key: data.Key,
+          Expires: 86400 * 2, // 48 hours
+        } );
+        return cb( null, data );
+
+      } else {
+
+        data.dl_url = data.Location;
+        return cb( null, data );
+
+      }
+
     } );
   } );
 

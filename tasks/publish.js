@@ -217,14 +217,14 @@ module.exports = function( gulp, config, args ) {
 
         var zipname = config.zip.name + '-' + version + '.zip';
 
-        upload( auth, './' + config.zip.dest + zipname, 'dist/' + config.publish.slug + '/' + zipname, config.privacy, function( err, data ) {
+        upload( auth, './' + config.zip.dest + zipname, 'dist/' + config.publish.slug + '/' + zipname, config.publish.privacy, function( err, data ) {
 
           if ( err ) {
             return reject( err );
           }
 
           return resolve( {
-            message: '*Zip File*: ' + data.Location,
+            message: '*Zip File*: ' + data.dl_url,
           } );
 
         } );
