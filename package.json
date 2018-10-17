@@ -36,6 +36,7 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
     "gulp-vinyl-zip": "^2.1.0",
+    "gulp-wp-pot": "^2.3.2",
     "inquirer": "^5.2.0",
     "markdown-html": "0.0.8",
     "merge": "^1.2.0",
@@ -49,7 +50,6 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-wp-pot": "^2.3.2"
+    "gulp": "^3.9.1"
   }
 }
