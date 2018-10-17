@@ -2,9 +2,11 @@ module.exports = function( gulp, config ) {
 
   var checkTextDomain = require( 'gulp-checktextdomain' );
 
+  var processed = []; // consume through2 stream / buffer to ensure we don't hit the high water mark
+
   gulp.task( 'textdomain', function() {
 
-    gulp.src( [ '*.php', './**/*.php', '!vendor/*' ] )
+    gulp.src( [ '*.php', '**/*.php', '!vendor/*', '!vendor/**/*.php' ] )
 
       .pipe( checkTextDomain( {
         correct_domain: true,
@@ -26,6 +28,12 @@ module.exports = function( gulp, config ) {
         ],
         text_domain: config.pot.domain,
       } ) )
+      .on( 'data', function( data, path ) {
+          processed.push( data );
+      } )
+      .on( 'end', function() {
+        delete processed;
+      } );
 
   } );
 
