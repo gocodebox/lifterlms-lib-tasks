@@ -1,13 +1,20 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 /**
  * Localize JS strings
  * This file should not be edited directly
  * It is compiled automatically via the gulp task `js:pot`
  * See the lifterlms-lib-tasks package for more information
+ *
+ * @package  {{ package }}
+ * @since    {{ filesince }}
+ * @version  {{ fileversion }}
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Localize JS strings
+ *
  * @since    {{ filesince }}
  * @version  {{ fileversion }}
  */

@@ -6,7 +6,7 @@ module.exports = function( gulp, config ) {
 
   gulp.task( 'pot', [ 'pot:js' ], function() {
 
-    gulp.src( [ '*.php', './**/*.php', '!vendor/*' ] )
+    gulp.src( [ './*.php', './**/*.php', '!vendor/*', '!vendor/**/*.php' ] )
 
       .pipe( sort() )
 

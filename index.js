@@ -15,6 +15,12 @@ module.exports = function( gulp ) {
     dist: {
       tasks: [ 'versioner', 'build', 'zip' ],
     },
+    docs: {
+      hooks: {
+        src: [ '*.php', './**/*.php', '!tests/*', '!vendor/*' ],
+      },
+      package: 'LifterLMS',
+    },
     pot: {
       bugReport: 'https://lifterlms.com/my-account/my-tickets',
       domain: package.name,
@@ -106,6 +112,7 @@ module.exports = function( gulp ) {
 
   require( __dirname + '/tasks/build' )( gulp, config, argv );
   require( __dirname + '/tasks/dist' )( gulp, config, argv );
+  require( __dirname + '/tasks/hooks' )( gulp, config, argv );
   require( __dirname + '/tasks/pot' )( gulp, config, argv );
   require( __dirname + '/tasks/pot:js' )( gulp, config, argv );
   require( __dirname + '/tasks/publish' )( gulp, config, argv );

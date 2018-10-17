@@ -13,6 +13,7 @@ module.exports = function( gulp, config ) {
 
       var obj = {},
           counter = 0;
+          package = config.docs.package + '/Classes/Localization',
           patterns = config.pot.jsSrc,
           fileversion = '0.0.0';
 
@@ -86,6 +87,7 @@ module.exports = function( gulp, config ) {
       };
 
       data = template.replace( /{{ classname }}/g, config.pot.jsClassname );
+      data = data.replace( /{{ package }}/g, package );
       data = data.replace( /{{ fileversion }}/g, fileversion );
       data = data.replace( /{{ filesince }}/g, config.pot.jsSince );
       data = data.replace( /{{ strings }}/g, strings );
