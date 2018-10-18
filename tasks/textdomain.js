@@ -4,7 +4,7 @@ module.exports = function( gulp, config ) {
 
   var processed = []; // consume through2 stream / buffer to ensure we don't hit the high water mark
 
-  gulp.task( 'textdomain', function() {
+  gulp.task( 'textdomain', function( cb ) {
 
     gulp.src( [ '*.php', '**/*.php', '!vendor/*', '!vendor/**/*.php' ] )
 
@@ -34,6 +34,8 @@ module.exports = function( gulp, config ) {
       .on( 'end', function() {
         delete processed;
       } );
+
+    cb();
 
   } );
 

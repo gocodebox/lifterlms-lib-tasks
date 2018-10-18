@@ -12,9 +12,6 @@ module.exports = function( gulp ) {
     build: {
       custom: [],
     },
-    dist: {
-      tasks: [ 'versioner', 'build', 'zip' ],
-    },
     docs: {
       hooks: {
         src: [ '*.php', './**/*.php', '!tests/*', '!vendor/*' ],
@@ -110,11 +107,9 @@ module.exports = function( gulp ) {
     config.pot.jsSrc = config.scripts.src;
   }
 
-  require( __dirname + '/tasks/build' )( gulp, config, argv );
-  require( __dirname + '/tasks/dist' )( gulp, config, argv );
-  require( __dirname + '/tasks/hooks' )( gulp, config, argv );
-  require( __dirname + '/tasks/pot' )( gulp, config, argv );
+  // require( __dirname + '/tasks/hooks' )( gulp, config, argv );
   require( __dirname + '/tasks/pot:js' )( gulp, config, argv );
+  require( __dirname + '/tasks/pot' )( gulp, config, argv );
   require( __dirname + '/tasks/publish' )( gulp, config, argv );
   require( __dirname + '/tasks/scripts' )( gulp, config, argv );
   require( __dirname + '/tasks/styles' )( gulp, config, argv );
@@ -123,5 +118,7 @@ module.exports = function( gulp ) {
   require( __dirname + '/tasks/versioner' )( gulp, config, argv );
   require( __dirname + '/tasks/watch' )( gulp, config, argv );
   require( __dirname + '/tasks/zip' )( gulp, config, argv );
+
+  require( __dirname + '/tasks/build' )( gulp, config, argv );
 
 };

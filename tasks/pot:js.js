@@ -5,7 +5,7 @@ module.exports = function( gulp, config ) {
       compare = require( 'node-version-compare' )
     ;
 
-  gulp.task( 'pot:js', function() {
+  gulp.task( 'pot:js', function( cb ) {
 
       if ( ! config.pot.js ) {
         return;
@@ -101,6 +101,8 @@ module.exports = function( gulp, config ) {
           console.log( 'jspot completed and found ' + counter + ' strings' );
 
       } );
+
+    cb();
 
   } );
 

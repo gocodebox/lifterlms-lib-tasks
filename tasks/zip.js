@@ -5,7 +5,7 @@ module.exports = function( gulp, config, args ) {
      ,      zip = require( 'gulp-vinyl-zip' )
   ;
 
-  gulp.task( 'zip', function() {
+  gulp.task( 'zip', function( cb ) {
 
     // if configured, run composer to install only prod. deps.
     if ( config.zip.composer ) {
@@ -33,6 +33,8 @@ module.exports = function( gulp, config, args ) {
           composer( 'install', { async: false } )
         }
       } );
+
+    cb();
 
   } );
 

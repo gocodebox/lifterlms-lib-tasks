@@ -8,7 +8,7 @@ module.exports = function( gulp, config ) {
       , run     = require( 'gulp-run' )
   ;
 
-  gulp.task( 'versioner', config.versioner.custom, function() {
+  gulp.task( 'versioner', config.versioner.custom, function( cb ) {
 
     var the_version = argv.V,
         glob = config.versioner.src;
@@ -55,6 +55,8 @@ module.exports = function( gulp, config ) {
       // restore all files filtered out
       .pipe( main_filter.restore )
       .pipe( gulp.dest( './' ) );
+
+    cb();
 
   } );
 

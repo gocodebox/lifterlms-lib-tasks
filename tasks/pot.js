@@ -4,7 +4,7 @@ module.exports = function( gulp, config ) {
     , wpPot = require( 'gulp-wp-pot' )
   ;
 
-  gulp.task( 'pot', [ 'pot:js' ], function() {
+  gulp.task( 'pot', gulp.series( 'pot:js' ), function( cb ) {
 
     gulp.src( [ './*.php', './**/*.php', '!vendor/*', '!vendor/**/*.php' ] )
 
@@ -18,7 +18,9 @@ module.exports = function( gulp, config ) {
         team: config.pot.team,
       } ) )
 
-      .pipe( gulp.dest( config.pot.dest + config.pot.domain + '.pot' ) )
+      .pipe( gulp.dest( config.pot.dest + config.pot.domain + '.pot' ) );
+
+      cb();
 
   } );
 

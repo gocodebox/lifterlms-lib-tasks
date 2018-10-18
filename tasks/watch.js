@@ -6,15 +6,15 @@ module.exports = function( gulp, config ) {
 
       config.watch.custom.forEach( function( obj ) {
 
-        gulp.watch( obj.glob, obj.tasks );
+        gulp.watch( obj.glob, gulp.parallel( ...obj.tasks ) );
 
       } );
 
     }
 
-    gulp.watch( [ '*.php', './**/*.php', '!vendor/*', '!./**/' + config.pot.jsFilename ], [ 'textdomain' ] );
-    gulp.watch( config.scripts.watch, [ 'scripts' ] );
-    gulp.watch( config.styles.watch, [ 'styles' ] );
+    gulp.watch( [ '*.php', './**/*.php', '!vendor/*', '!./**/' + config.pot.jsFilename ], gulp.parallel( 'textdomain' ) );
+    gulp.watch( config.scripts.watch, gulp.parallel( 'scripts' ) );
+    gulp.watch( config.styles.watch, gulp.parallel( 'styles' ) );
 
   } );
 
