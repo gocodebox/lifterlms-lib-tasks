@@ -14,14 +14,12 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Localize JS strings
- *
- * @since    {{ filesince }}
- * @version  {{ fileversion }}
  */
 class {{ classname }} {
 
 	/**
 	 * Constructor
+	 *
 	 * @since    {{ filesince }}
 	 * @version  {{ filesince }}
 	 */
@@ -31,17 +29,18 @@ class {{ classname }} {
 
 	/**
 	 * Get strings to be passed to LifterLMS l10n class
-	 * @param    array  $strings  existing strings from core / 3rd parties
+	 *
+	 * @param    array $strings existing strings from core / 3rd parties.
 	 * @return   array
 	 * @since    {{ filesince }}
 	 * @version  {{ fileversion }}
 	 */
 	public function get_strings( $strings ) {
-
+		// phpcs:disable
 		return array_merge( $strings, array(
 {{ strings }}
 		) );
-
+		// phpcs:enable
 	}
 
 }

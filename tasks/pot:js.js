@@ -75,7 +75,8 @@ module.exports = function( gulp, config ) {
 
           strings += '\n\
 \t\t\t/**\n\
-\t\t\t * file: ' + file + '\n\
+\t\t\t * File: ' + file + '.\n\
+\t\t\t *\n\
 \t\t\t * @since    ' + obj[file].since +'\n\
 \t\t\t * @version  ' + obj[file].version +'\n\
 \t\t\t */\n\
