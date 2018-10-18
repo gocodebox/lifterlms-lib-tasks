@@ -8,7 +8,7 @@ module.exports = function( gulp, config ) {
       , run     = require( 'gulp-run' )
   ;
 
-  gulp.task( 'versioner', config.versioner.custom, function( cb ) {
+  gulp.task( 'versioner', gulp.series( ...config.versioner.custom ), function( cb ) {
 
     var the_version = argv.V,
         glob = config.versioner.src;

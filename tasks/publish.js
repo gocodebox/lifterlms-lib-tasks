@@ -91,7 +91,7 @@ module.exports = function( gulp, config, args ) {
       }
   };
 
-  gulp.task( 'publish', function() {
+  gulp.task( 'publish', function( cb ) {
 
     if ( ! get_auth_file() ) {
       return log_err( 'Missing Auth File, cannot proceed.' );
