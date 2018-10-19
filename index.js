@@ -108,6 +108,7 @@ module.exports = function( gulp ) {
   }
 
   // require( __dirname + '/tasks/hooks' )( gulp, config, argv );
+  require( __dirname + '/tasks/pot:php' )( gulp, config, argv );
   require( __dirname + '/tasks/pot:js' )( gulp, config, argv );
   require( __dirname + '/tasks/pot' )( gulp, config, argv );
   require( __dirname + '/tasks/publish' )( gulp, config, argv );

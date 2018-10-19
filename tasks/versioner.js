@@ -8,9 +8,7 @@ module.exports = function( gulp, config ) {
       , run     = require( 'gulp-run' )
   ;
 
-  var tasks = config.versioner.custom.length ? gulp.series( ...config.versioner.custom ) : null;
-
-  gulp.task( 'versioner', tasks, function( cb ) {
+  gulp.task( '_versioner', function( cb ) {
 
     var the_version = argv.V,
         glob = config.versioner.src;
@@ -61,5 +59,8 @@ module.exports = function( gulp, config ) {
     cb();
 
   } );
+
+  var tasks = config.versioner.custom.push( '_versioner' );
+  gulp.task( 'versioner', gulp.series( ...config.versioner.custom ) );
 
 };
