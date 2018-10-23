@@ -71,7 +71,7 @@ module.exports = function( gulp ) {
     },
     versioner: {
       custom: [],
-      main: package.name + '.php',
+      main: [ package.name + '.php', 'class-' + package.name + '.php' ],
       scripts: true,
       src: [ './*.php', './inc/**/*.php', './includes/**/*.php', './templates/**/*.php', './tests/**/*.php' ],
     },

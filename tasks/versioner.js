@@ -28,8 +28,17 @@ module.exports = function( gulp, config ) {
       run( 'npm version --no-git-tag-version ' + the_version ).exec();
     }
 
-    var main_glob = config.versioner.main ? [ config.versioner.main ] : [ '**' ],
-        main_filter = filter( main_glob, { restore: true } );
+    var main_glob = [ '**' ];
+
+    if ( config.versioner.main ) {
+      if ( 'string' === typeof config.versioner.main ) {
+        main_glob = [ config.versioner.main ];
+      } else {
+        main_glob = config.versioner.main;
+      }
+    }
+
+    var main_filter = filter( main_glob, { restore: true } );
 
     return gulp.src( glob, { base: './' } )
       // version all applicable files
@@ -39,6 +48,7 @@ module.exports = function( gulp, config ) {
       // filter to the main plugin file & perform more replacements there
       .pipe( main_filter )
       .pipe( replace( / \* Version: (\d+\.\d+\.\d+)(\-\D+\.\d+)?/g, function( match, p1, p2, string ) {
+        console.log( match );
         // if there's a prerelease suffix (eg -beta.1) remove it entirely
         if ( p2 ) {
           match = match.replace( p2, '' );
