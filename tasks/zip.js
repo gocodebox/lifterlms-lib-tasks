@@ -14,7 +14,7 @@ module.exports = function( gulp, config, args ) {
       composer( 'install --no-dev --no-scripts', { async: false } );
     // if not configured, exclude composer from the build
     } else {
-      build_src.concat( '!./vendor/**' );
+      build_src = build_src.concat( '!./vendor/**' );
     }
 
     return gulp.src( build_src )
