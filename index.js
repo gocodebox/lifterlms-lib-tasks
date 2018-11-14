@@ -13,11 +13,13 @@ module.exports = function( gulp ) {
       custom: [],
     },
     docs: {
+      src: './docs/',
       hooks: {
+        filename: 'hooks-reference.md',
         src: [ '*.php', './**/*.php', '!tests/*', '!vendor/*' ],
       },
-      package: 'LifterLMS',
     },
+    package_name: 'LifterLMS',
     pot: {
       bugReport: 'https://lifterlms.com/my-account/my-tickets',
       domain: package.name,
@@ -69,6 +71,10 @@ module.exports = function( gulp ) {
       src: [ 'assets/scss/**/*.scss', '!assets/scss/**/_*.scss' ],
       watch: [ 'assets/scss/**/*.scss' ],
     },
+    slush: {
+      includes_dir: './includes/',
+      shortname: '',
+    },
     versioner: {
       custom: [],
       main: [ package.name + '.php', 'class-' + package.name + '.php' ],
@@ -107,7 +113,7 @@ module.exports = function( gulp ) {
     config.pot.jsSrc = config.scripts.src;
   }
 
-  // require( __dirname + '/tasks/hooks' )( gulp, config, argv );
+  require( __dirname + '/tasks/hooks' )( gulp, config, argv );
   require( __dirname + '/tasks/pot:php' )( gulp, config, argv );
   require( __dirname + '/tasks/pot:js' )( gulp, config, argv );
   require( __dirname + '/tasks/pot' )( gulp, config, argv );
@@ -121,5 +127,6 @@ module.exports = function( gulp ) {
   require( __dirname + '/tasks/zip' )( gulp, config, argv );
 
   require( __dirname + '/tasks/build' )( gulp, config, argv );
+  require( __dirname + '/tasks/build:docs' )( gulp, config, argv );
 
 };
