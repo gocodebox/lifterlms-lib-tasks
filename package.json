@@ -45,7 +45,7 @@
     "gulp-wp-pot": "^2.3.2",
     "inquirer": "^5.2.0",
     "markdown-html": "0.0.8",
-    "merge": "^1.2.0",
+    "merge": "^1.2.1",
     "metalsmith-markdown": "^1.1.0",
     "node-svn-ultimate": "^1.1.0",
     "node-version-compare": "^1.0.1",
