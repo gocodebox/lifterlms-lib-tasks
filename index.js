@@ -92,11 +92,11 @@ module.exports = function( gulp ) {
         default: [
           './**/*.*',
           '!./assets/scss/**',
-          '!./deploy/**', '!./dist/**', '!./tmp/**', '!./gulpfile.js/', '!./gulpfile.js/**/*.*', '!./node_modules/**', '!./tests/**',
+          '!./deploy/**', '!./dist/**', '!./tmp/**', '!./gulpfile.js/**', '!./gulpfile.js/**/*.*', '!./node_modules/**', '!./tests/**',
           '!./**/*.yml',
           '!./**/composer.json', '!./**/composer.lock',
           '!./**/package.json', '!./**/package-lock.json',
-          '!./*.xml',
+          '!./*.xml', '!./*.xml.dist',
           '!./README.md',
         ],
         custom: [],
