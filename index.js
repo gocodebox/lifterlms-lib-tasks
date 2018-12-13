@@ -32,6 +32,7 @@ module.exports = function( gulp ) {
       lastTranslator: 'Thomas Patrick Levy <thomas@lifterlms.com>',
       team: 'LifterLMS <help@lifterlms.com>',
       package: package.name,
+      phpSrc: [ './*.php', './**/*.php', '!vendor/*', '!vendor/**/*.php' ],
     },
     publish: {
       github: {
