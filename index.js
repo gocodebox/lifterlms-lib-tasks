@@ -13,6 +13,7 @@ module.exports = function( gulp ) {
       custom: [],
     },
     docs: {
+      package: package.name,
       src: './docs/',
       hooks: {
         filename: 'hooks-reference.md',
