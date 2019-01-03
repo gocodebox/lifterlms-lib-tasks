@@ -20,10 +20,10 @@ module.exports = function( gulp, config ) {
 
     hook.forEach( function( line, index ) {
 
-      if ( 0 === line.indexOf( '@filter' ) ) {
-        parsed.hook = line.replace( '@filter', '' ).trim();
-      } else if ( 0 === line.indexOf( '@action' ) ) {
-        parsed.hook = line.replace( '@action', '' ).trim();
+      if ( 0 === line.indexOf( 'Filter:' ) ) {
+        parsed.hook = line.replace( 'Filter:', '' ).trim();
+      } else if ( 0 === line.indexOf( 'Action:' ) ) {
+        parsed.hook = line.replace( 'Action:', '' ).trim();
       } else if ( 0 === line.indexOf( '@since' ) ) {
         parsed.since = line.replace( '@since', '' ).trim();
       } else if ( 0 === line.indexOf( '@version' ) ) {
@@ -68,15 +68,23 @@ module.exports = function( gulp, config ) {
       '**Since**': parsed.since + '<br>',
       '**Version**': parsed.version + '<br>',
     }, { showHeaders: false } );
-    doc += '\r\n';
 
     if ( parsed.example ) {
-      doc += '\r\n**Example** [' + parsed.example + '](' + parsed.example + ')\r\n';
+      doc += '\r\n\r\n**Example** ';
+      // Example is a link to a gist or something.
+      if ( -1 !== parsed.example.indexOf( '://' ) ) {
+        doc += '[' + parsed.example + '](' + parsed.example + ')';
+      // doc is a code snippet.
+      } else {
+        doc += '`' + parsed.example + '`';
+      }
     }
 
-    doc += '\r\n';
-    doc += '**Parameters**  \r\n';
-    doc += columnify( parsed.params, { showHeaders: false } )
+    if ( parsed.params.length ) {
+      doc += '\r\n\r\n';
+      doc += '**Parameters**  \r\n';
+      doc += columnify( parsed.params, { showHeaders: false } )
+    }
 
     return doc;
 
@@ -101,9 +109,9 @@ module.exports = function( gulp, config ) {
           return ( line );
         } );
 
-        if ( -1 !== lines[0].indexOf( '@filter' ) ) {
+        if ( lines.length && -1 !== lines[0].indexOf( 'Filter:' ) ) {
           hooks.filters.push( createHookDocs( lines ) );
-        } else if ( -1 !== lines[0].indexOf( '@action' ) ) {
+        } else if ( lines.length && -1 !== lines[0].indexOf( 'Action:' ) ) {
           hooks.actions.push( createHookDocs( lines ) );
         }
 
