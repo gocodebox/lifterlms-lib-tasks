@@ -8,6 +8,7 @@ module.exports = function( gulp, config ) {
   gulp.task( 'pot:js', function( cb ) {
 
       if ( ! config.pot.js ) {
+        cb()
         return;
       }
 
