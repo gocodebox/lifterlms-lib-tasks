@@ -5,6 +5,12 @@ function inquire( opts, cb ) {
   return inquirer.prompt( [
 
     {
+      type: 'input',
+      name: 'version',
+      message: 'Version number',
+      default: opts.ver,
+    },
+    {
       type: 'confirm',
       name: 'gh_release',
       message: 'Create a GitHub Release?',

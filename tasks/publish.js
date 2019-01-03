@@ -1,15 +1,17 @@
 module.exports = function( gulp, config, args ) {
 
-  var       git = require( '../publish/gitCommit' )
-    , changelog = require( '../publish/changelog' )
-    ,    colors = require( 'ansi-colors' )
-    ,  fancylog = require( 'fancy-log' )
-    ,        fs = require( 'fs' )
-    ,   inquire = require( '../publish/inquire' )
-    ,   request = require( 'request' )
-    ,    rimraf = require( 'rimraf' )
-    , svnCommit = require( '../publish/svnCommit' )
-    ,    upload = require( '../publish/aws' )
+  var
+       changelog = require( '../publish/changelog' )
+    ,     colors = require( 'ansi-colors' )
+    ,   fancylog = require( 'fancy-log' )
+    ,         fs = require( 'fs' )
+    , getVersion = require( '../lib/getVersion' )
+    ,        git = require( '../publish/gitCommit' )
+    ,    inquire = require( '../publish/inquire' )
+    ,    request = require( 'request' )
+    ,     rimraf = require( 'rimraf' )
+    ,  svnCommit = require( '../publish/svnCommit' )
+    ,     upload = require( '../publish/aws' )
   ;
 
   var auth = false,
@@ -97,13 +99,8 @@ module.exports = function( gulp, config, args ) {
       return log_err( 'Missing Auth File, cannot proceed.' );
     }
 
-    var version = args.V;
-
-    if ( ! version ) {
-      return log_err( 'Missing version number! Rerun task with -V 1.0.0' );
-    }
-
     var opts = {
+      ver: getVersion( args.V, config._package.version ),
       aws: ( auth.aws_id && auth.aws_secret && auth.aws_bucket ),
       gh: ( auth.github ),
       make: ( config.publish.lifterlms.make && auth.make_user && auth.make_pass ),
@@ -118,7 +115,8 @@ module.exports = function( gulp, config, args ) {
         fs.mkdirSync( './tmp' );
       }
 
-      var to_process = [];
+      var to_process = []
+          version = answers.version;
 
       /**
        * Update product metadata at LifterLMS.com
