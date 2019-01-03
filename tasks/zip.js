@@ -1,8 +1,10 @@
 module.exports = function( gulp, config, args ) {
 
-  var  composer = require( 'gulp-composer' )
-     ,   rename = require( 'gulp-rename' )
-     ,      zip = require( 'gulp-vinyl-zip' )
+  const
+         composer = require( 'gulp-composer' )
+     , getVersion = require( '../lib/getVersion' )
+     ,     rename = require( 'gulp-rename' )
+     ,        zip = require( 'gulp-vinyl-zip' )
   ;
 
   gulp.task( 'zip', function( cb ) {
@@ -24,11 +26,9 @@ module.exports = function( gulp, config, args ) {
       } ) )
       // zip it up
       .pipe( zip.zip( config.zip.name + '.zip' ) )
-      // rename the zip to have the version suffix (if applicable)
+      // rename the zip to have the version suffix
       .pipe( rename( function( path ) {
-        if ( args.V ) {
-          path.basename += '-' + args.V;
-        }
+        path.basename += '-' + getVersion( args.V, config._package.version );
       } ) )
       // save in the dest dir
       .pipe( gulp.dest( config.zip.dest ) )
