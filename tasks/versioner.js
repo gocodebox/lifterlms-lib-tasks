@@ -1,31 +1,31 @@
 module.exports = function( gulp, config ) {
 
-  var   replace = require( 'gulp-replace' )
-      , argv    = require( 'yargs' ).argv
-      ,  filter = require( 'gulp-filter' )
-      , fs      = require( 'fs' )
-      , gutil   = require( 'gulp-util' )
-      , run     = require( 'gulp-run' )
-  ;
+  const replace = require( 'gulp-replace' ),
+        argv = require( 'yargs' ).argv,
+        filter = require( 'gulp-filter' ),
+        fs = require( 'fs' ),
+        gutil = require( 'gulp-util' ),
+        run = require( 'gulp-run' ),
+        getVersion = require( '../lib/getVersion' );
 
   gulp.task( '_versioner', function( cb ) {
 
-    var the_version = argv.V,
+    let the_version = argv.V,
         glob = config.versioner.src;
+
+    the_version = getVersion( the_version, config._package.version );
+
+    gutil.log( gutil.colors.blue( 'Updating version to `' + the_version + '`' ) );
 
     // include JS files if configured to do so
     if ( config.versioner.scripts ) {
       glob = glob.concat( config.scripts.src );
     }
 
-    if ( ! the_version ) {
-      gutil.log( gutil.colors.red( 'Missing version number. Try `gulp versioner -V 9.9.9`' ) );
-      return;
-    }
-
-    if ( true !== argv.skip_package ) {
-      // updates the package file
-      run( 'npm version --no-git-tag-version ' + the_version ).exec();
+    // Update the package file unless explicitly skipping or the version is equal to the current pacakage version.
+    if ( the_version !== config._package.version && true !== argv.skip_package ) {
+      // updates the package file.
+      run( 'npm version --no-git-tag-version ' + the_version, { silent: true } ).exec();
     }
 
     var main_glob = [ '**' ];
@@ -48,7 +48,6 @@ module.exports = function( gulp, config ) {
       // filter to the main plugin file & perform more replacements there
       .pipe( main_filter )
       .pipe( replace( / \* Version: (\d+\.\d+\.\d+)(\-\D+\.\d+)?/g, function( match, p1, p2, string ) {
-        console.log( match );
         // if there's a prerelease suffix (eg -beta.1) remove it entirely
         if ( p2 ) {
           match = match.replace( p2, '' );
