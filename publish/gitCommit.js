@@ -32,7 +32,7 @@ module.exports = function( gulp, config, version, cb ) {
           // add it all
           .pipe( git.add( { args: '--all', cwd: tmpdir } ) )
           // commit it all
-          .pipe( git.commit( 'Deploy v' + version, { cwd: tmpdir } ) )
+          .pipe( git.commit( 'Deploy v' + version + ' [ci skip]', { cwd: tmpdir } ) )
           .on( 'end', function() {
 
             // git.status( { cwd: tmpdir } );
