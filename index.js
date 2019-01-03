@@ -17,7 +17,7 @@ module.exports = function( gulp ) {
       src: './docs/',
       hooks: {
         filename: 'hooks-reference.md',
-        src: [ '*.php', './**/*.php', '!tests/*', '!vendor/*' ],
+        src: [ '*.php', './**/*.php', '!tests/**', '!vendor/**' ],
       },
     },
     package_name: 'LifterLMS',
@@ -33,7 +33,7 @@ module.exports = function( gulp ) {
       lastTranslator: 'Thomas Patrick Levy <thomas@lifterlms.com>',
       team: 'LifterLMS <help@lifterlms.com>',
       package: package.name,
-      phpSrc: [ './*.php', './**/*.php', '!vendor/*', '!vendor/**/*.php' ],
+      phpSrc: [ './*.php', './**/*.php', '!vendor/**', '!tmp/**' ],
     },
     publish: {
       github: {
