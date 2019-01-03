@@ -6,7 +6,7 @@ module.exports = function( gulp, config ) {
 
   gulp.task( 'textdomain', function( cb ) {
 
-    gulp.src( [ '*.php', '**/*.php', '!vendor/*', '!vendor/**/*.php' ] )
+    gulp.src( [ '*.php', '**/*.php', '!vendor/**', '!tmp/**' ] )
 
       .pipe( checkTextDomain( {
         correct_domain: true,
