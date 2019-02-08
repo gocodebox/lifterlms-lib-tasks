@@ -3,6 +3,7 @@ module.exports = function( gulp, config ) {
 
   var metalsmith = require( 'gulp-metalsmith' )
       , markdown = require( 'metalsmith-markdown' )
+      , layouts  = require( 'metalsmith-layouts' )
   ;
 
   gulp.task( 'build:docs', gulp.series( 'hooks', function( cb ) {
@@ -11,7 +12,11 @@ module.exports = function( gulp, config ) {
       .pipe( metalsmith( {
         root: __dirname,
         use: [
-          markdown()
+          markdown(),
+          layouts( {
+            default: 'layout.hbs',
+            engine: 'handlebars'
+          } )
         ],
         json: [ config.docs.src + 'pages.json' ],
       } ) )
