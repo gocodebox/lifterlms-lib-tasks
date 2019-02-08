@@ -20,7 +20,7 @@ module.exports = function( gulp ) {
         src: [ '*.php', './**/*.php', '!tests/**', '!vendor/**' ],
       },
     },
-    package_name: 'LifterLMS',
+    package_name: 'LifterLMS', // This is confusing?
     pot: {
       bugReport: 'https://lifterlms.com/my-account/my-tickets',
       domain: package.name,
@@ -33,7 +33,7 @@ module.exports = function( gulp ) {
       lastTranslator: 'Thomas Patrick Levy <thomas@lifterlms.com>',
       team: 'LifterLMS <help@lifterlms.com>',
       package: package.name,
-      phpSrc: [ './*.php', './**/*.php', '!vendor/**', '!tmp/**' ],
+      phpSrc: [ './*.php', './**/*.php', '!vendor/**', '!tmp/**', '!tests/**' ],
     },
     publish: {
       github: {
@@ -75,6 +75,7 @@ module.exports = function( gulp ) {
     },
     slush: {
       includes_dir: './includes/',
+      package_main: package.name,
       shortname: '',
     },
     versioner: {
