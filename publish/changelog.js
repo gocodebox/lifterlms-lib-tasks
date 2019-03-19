@@ -7,13 +7,9 @@ function changelog() {
 
   this.createHtmlFile = function( config, cb ) {
 
-    var converter =  new showdown.Converter( {
-          completeHTMLDocument: true,
-          metadata: true,
-        } ),
-        template = fs.readFileSync( __dirname + '/../templates/changelog.template', 'utf-8' ).toString(),
+    var template = fs.readFileSync( __dirname + '/../templates/changelog.template', 'utf-8' ).toString(),
         css = fs.readFileSync( require.resolve( 'normalize.css' ), 'utf-8' ),
-        html = converter.makeHtml( raw_log );
+        html = this.mdToHtml( raw_log );
 
         template = template.replace( /{{ title }}/g, config.publish.title + ' Changelog' );
         template = template.replace( /{{ body }}/g, html );
@@ -22,6 +18,17 @@ function changelog() {
     return fs.writeFile( './tmp/changelog.html', template, cb );
 
   }
+
+  this.mdToHtml = function( md ) {
+
+    var converter =  new showdown.Converter( {
+      completeHTMLDocument: true,
+      metadata: true,
+    } );
+
+    return converter.makeHtml( md );
+
+  };
 
   this.getDistNotes = function ( cb ) {
 

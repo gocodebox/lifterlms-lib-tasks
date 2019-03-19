@@ -362,6 +362,8 @@ module.exports = function( gulp, config, args ) {
           notes.splice( 0, 3 );
           notes = notes.join( '\n' );
 
+          notes = changelog.mdToHtml( notes );
+
           return request.post( {
             url: 'https://make.lifterlms.com/wp-json/wp/v2/posts',
             auth: {
