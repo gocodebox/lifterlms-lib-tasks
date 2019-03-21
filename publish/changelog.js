@@ -9,7 +9,7 @@ function changelog() {
 
     var template = fs.readFileSync( __dirname + '/../templates/changelog.template', 'utf-8' ).toString(),
         css = fs.readFileSync( require.resolve( 'normalize.css' ), 'utf-8' ),
-        html = this.mdToHtml( raw_log );
+        html = this.mdToHtml( raw_log, true );
 
         template = template.replace( /{{ title }}/g, config.publish.title + ' Changelog' );
         template = template.replace( /{{ body }}/g, html );
@@ -19,10 +19,10 @@ function changelog() {
 
   }
 
-  this.mdToHtml = function( md ) {
+  this.mdToHtml = function( md, completeHTMLDocument ) {
 
     var converter =  new showdown.Converter( {
-      completeHTMLDocument: true,
+      completeHTMLDocument: completeHTMLDocument,
       metadata: true,
     } );
 
