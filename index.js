@@ -63,7 +63,18 @@ module.exports = function( gulp ) {
       title: package.name,
     },
     scripts: {
+      // Whether or not to build a ".dist" version (useful when using includes).
+      dist: false,
       dest: 'assets/js/',
+      // Define the settings passed to `gulp-include`.
+      include: {
+        includePaths: [
+          // look for includes in the lib-tasks node_modules directory.
+          __dirname + '/node_modules',
+          // look for includes in the project node_modules directory.
+          process.cwd() + '/node_modules',
+        ]
+      },
       src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
       watch: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
     },
@@ -92,6 +103,7 @@ module.exports = function( gulp ) {
       dest: 'dist/',
       name: package.name,
       src: {
+        // Default glob.
         default: [
           './**/*.*',
           '!./assets/scss/**',
@@ -102,6 +114,7 @@ module.exports = function( gulp ) {
           '!./*.xml', '!./*.xml.dist',
           '!./README.md',
         ],
+        // Add extra files to the glob, useful when wanting to add something withouth having to overwrite the entire default.
         custom: [],
       },
     }
@@ -114,6 +127,17 @@ module.exports = function( gulp ) {
 
   if ( ! config.pot.jsSrc.length ) {
     config.pot.jsSrc = config.scripts.src;
+  }
+
+  // add defaults for distribution suffixes.
+  if ( false !== config.scripts.dist ) {
+    // if "true" use default ".dist".
+    config.scripts.dist = true === config.scripts.dist ? '.dist' : config.scripts.dist;
+
+    // ignore the dist versions for building and watching.
+    config.scripts.src.push( '!assets/js/**/*' + config.scripts.dist + '.js' );
+    config.scripts.watch.push( '!assets/js/**/*' + config.scripts.dist + '.js' );
+
   }
 
   require( __dirname + '/tasks/hooks' )( gulp, config, argv );

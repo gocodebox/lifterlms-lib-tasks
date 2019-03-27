@@ -1,7 +1,8 @@
 module.exports = function( gulp, config ) {
 
   const
-      include = require( 'gulp-include' )
+       gulpif = require( 'gulp-if' )
+    , include = require( 'gulp-include' )
     ,    maps = require( 'gulp-sourcemaps' )
     ,    pump = require( 'pump' )
     ,  rename = require( 'gulp-rename' )
@@ -13,7 +14,11 @@ module.exports = function( gulp, config ) {
     pump( [
       gulp.src( config.scripts.src ),
         maps.init(),
-        include(),
+        include( config.scripts.include ),
+        gulpif( false !== config.scripts.dist, rename( {
+          suffix: config.scripts.dist,
+        } ) ),
+        gulpif( false !== config.scripts.dist, gulp.dest( config.scripts.dest ) ),
         uglify(),
         rename( {
           suffix: '.min',
