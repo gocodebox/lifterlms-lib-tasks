@@ -1,9 +1,7 @@
 module.exports = function( gulp, config ) {
 
   const
-        babel = require( 'gulp-babel' )
-    ,  gulpif = require( 'gulp-if' )
-    , include = require( 'gulp-include' )
+      include = require( 'gulp-include' )
     ,    maps = require( 'gulp-sourcemaps' )
     ,    pump = require( 'pump' )
     ,  rename = require( 'gulp-rename' )
@@ -15,7 +13,6 @@ module.exports = function( gulp, config ) {
     pump( [
       gulp.src( config.scripts.src ),
         maps.init(),
-        gulpif( config.scripts.babel, babel() ),
         include(),
         uglify(),
         rename( {

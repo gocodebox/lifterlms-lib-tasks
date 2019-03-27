@@ -66,7 +66,6 @@ module.exports = function( gulp ) {
       dest: 'assets/js/',
       src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
       watch: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
-      babel: false,
     },
     styles: {
       autoprefixer: 'last 2 versions',
