@@ -12,7 +12,7 @@ module.exports = function( gulp, config ) {
 
     }
 
-    gulp.watch( [ '*.php', './**/*.php', '!vendor/*', '!./**/' + config.pot.jsFilename ], gulp.parallel( 'textdomain' ) );
+    gulp.watch( [ '*.php', './**/*.php', '!tmp/**', '!vendor/*', '!./**/' + config.pot.jsFilename ], gulp.parallel( 'textdomain' ) );
     gulp.watch( config.scripts.watch, gulp.parallel( 'scripts' ) );
     gulp.watch( config.styles.watch, gulp.parallel( 'styles' ) );
 
