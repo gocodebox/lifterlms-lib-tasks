@@ -10,7 +10,6 @@ module.exports = function( gulp, config, args ) {
   gulp.task( 'zip', function( cb ) {
 
     var build_src = config.zip.src.default
-                      .concat( '!' + config.docs.src + '**' )
                       .concat( config.zip.src.custom );
 
     // if configured, run composer to install only prod. deps.

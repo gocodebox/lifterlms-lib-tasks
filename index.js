@@ -15,10 +15,6 @@ module.exports = function( gulp ) {
     docs: {
       package: package.name,
       src: './docs/',
-      hooks: {
-        filename: 'hooks-reference.md',
-        src: [ '*.php', './**/*.php', '!tests/**', '!vendor/**' ],
-      },
     },
     package_name: 'LifterLMS', // This is confusing?
     pot: {
@@ -140,7 +136,6 @@ module.exports = function( gulp ) {
 
   }
 
-  require( __dirname + '/tasks/hooks' )( gulp, config, argv );
   require( __dirname + '/tasks/pot:php' )( gulp, config, argv );
   require( __dirname + '/tasks/pot:js' )( gulp, config, argv );
   require( __dirname + '/tasks/pot' )( gulp, config, argv );
@@ -154,6 +149,5 @@ module.exports = function( gulp ) {
   require( __dirname + '/tasks/zip' )( gulp, config, argv );
 
   require( __dirname + '/tasks/build' )( gulp, config, argv );
-  require( __dirname + '/tasks/build:docs' )( gulp, config, argv );
 
 };
