@@ -4,7 +4,7 @@ module.exports = function( gulp, config ) {
     , rtlcss = require( 'gulp-rtlcss' )
   ;
 
-  gulp.task( 'styles:rtl', function( cb ) {
+  gulp.task( 'styles-rtl', function( cb ) {
 
     gulp.src( [ config.styles.dest + '**/*.css', '!' + config.styles.dest + '**/*-rtl*.css' ] )
       .pipe( rtlcss() )

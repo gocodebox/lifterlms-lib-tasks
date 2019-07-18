@@ -4,6 +4,6 @@ module.exports = function( gulp, config ) {
     , wpPot = require( 'gulp-wp-pot' )
   ;
 
-  gulp.task( 'pot', gulp.series( 'pot:js', 'pot:php' ) );
+  gulp.task( 'pot', gulp.series( 'pot-js', 'pot-php' ) );
 
 };

@@ -136,13 +136,13 @@ module.exports = function( gulp ) {
 
   }
 
-  require( __dirname + '/tasks/pot:php' )( gulp, config, argv );
-  require( __dirname + '/tasks/pot:js' )( gulp, config, argv );
+  require( __dirname + '/tasks/pot-php' )( gulp, config, argv );
+  require( __dirname + '/tasks/pot-js' )( gulp, config, argv );
   require( __dirname + '/tasks/pot' )( gulp, config, argv );
   require( __dirname + '/tasks/publish' )( gulp, config, argv );
   require( __dirname + '/tasks/scripts' )( gulp, config, argv );
   require( __dirname + '/tasks/styles' )( gulp, config, argv );
-  require( __dirname + '/tasks/styles:rtl' )( gulp, config, argv );
+  require( __dirname + '/tasks/styles-rtl' )( gulp, config, argv );
   require( __dirname + '/tasks/textdomain' )( gulp, config, argv );
   require( __dirname + '/tasks/versioner' )( gulp, config, argv );
   require( __dirname + '/tasks/watch' )( gulp, config, argv );

@@ -4,7 +4,7 @@ module.exports = function( gulp, config ) {
     , wpPot = require( 'gulp-wp-pot' )
   ;
 
-  gulp.task( 'pot:php', function( cb ) {
+  gulp.task( 'pot-php', function( cb ) {
 
     gulp.src( config.pot.phpSrc )
 

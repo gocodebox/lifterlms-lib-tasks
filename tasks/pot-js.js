@@ -5,7 +5,7 @@ module.exports = function( gulp, config ) {
       compare = require( 'node-version-compare' )
     ;
 
-  gulp.task( 'pot:js', function( cb ) {
+  gulp.task( 'pot-js', function( cb ) {
 
       if ( ! config.pot.js ) {
         cb()
