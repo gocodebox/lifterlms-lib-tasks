@@ -26,8 +26,8 @@ module.exports = function( gulp ) {
       jsFilename: 'class-llms-l10n.php',
       jsSince: '1.0.0',
       jsSrc: [],
-      lastTranslator: 'Thomas Patrick Levy <thomas@lifterlms.com>',
-      team: 'LifterLMS <help@lifterlms.com>',
+      lastTranslator: 'Team LifterLMS <team@lifterlms.com>',
+      team: 'Team LifterLMS <team@lifterlms.com>',
       package: package.name,
       phpSrc: [ './*.php', './**/*.php', '!vendor/**', '!tmp/**', '!tests/**' ],
     },
@@ -69,7 +69,8 @@ module.exports = function( gulp ) {
           __dirname + '/node_modules',
           // look for includes in the project node_modules directory.
           process.cwd() + '/node_modules',
-        ]
+        ],
+        extra: [],
       },
       src: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
       watch: [ 'assets/js/**/*.js', '!assets/js/**/*.min.js', '!assets/js/**/*.js.map' ],
