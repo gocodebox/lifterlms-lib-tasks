@@ -1,7 +1,6 @@
 module.exports = function( gulp, config ) {
 
   var autoprefixer = require( 'gulp-autoprefixer' )
-    ,       gulpif = require( 'gulp-if' )
     ,   gulpignore = require( 'gulp-ignore' )
     ,         maps = require( 'gulp-sourcemaps' )
     ,         pump = require( 'pump' )
@@ -15,18 +14,19 @@ module.exports = function( gulp, config ) {
     pump( [
       gulp.src( config.styles.src ),
 
-        // unminified
+        // Unminified.
         maps.init(),
         sass( {
           outputStyle: 'nested',
         } ),
         autoprefixer( config.styles.autoprefixer ),
-        maps.write( '../maps', { includeContent: false, sourceRoot: '../sass/' } ),
+        maps.write( '../maps/css', { destPath: config.styles.dest } ),
         gulp.dest( config.styles.dest ),
 
+        // Don't pass maps any further.
         gulpignore.exclude( file => '.css' !== path.extname( file.basename ) ),
 
-        // minify
+        // Minified.
         sass( {
           outputStyle: 'compressed',
         } ),
@@ -34,7 +34,7 @@ module.exports = function( gulp, config ) {
         rename( {
           suffix: '.min',
         } ),
-        maps.write( '../maps', { includeContent: false, sourceRoot: '../sass/' } ),
+        maps.write( '../maps/css', { destPath: config.styles.dest } ),
         gulp.dest( config.styles.dest )
       ],
 
