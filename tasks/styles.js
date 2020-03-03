@@ -10,11 +10,6 @@ module.exports = function( gulp, config ) {
     ,         path = require( 'path' )
   ;
 
-  function mapSources( path, file ) {
-    console.log( path, file );
-    return '../scss/' + path;
-  }
-
   gulp.task( 'styles', function( cb ) {
 
     pump( [
@@ -27,7 +22,6 @@ module.exports = function( gulp, config ) {
         } ),
         autoprefixer( config.styles.autoprefixer ),
         maps.write( '../maps', { includeContent: false, sourceRoot: '../sass/' } ),
-        // maps.mapSources( mapSources ),
         gulp.dest( config.styles.dest ),
 
         gulpignore.exclude( file => '.css' !== path.extname( file.basename ) ),
@@ -40,7 +34,6 @@ module.exports = function( gulp, config ) {
         rename( {
           suffix: '.min',
         } ),
-        // maps.mapSources( mapSources ),
         maps.write( '../maps', { includeContent: false, sourceRoot: '../sass/' } ),
         gulp.dest( config.styles.dest )
       ],
