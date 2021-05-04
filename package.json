@@ -42,7 +42,7 @@
     "gulp-vinyl-zip": "^2.1.2",
     "gulp-wp-pot": "^2.3.5",
     "inquirer": "^5.2.0",
-    "merge": "^1.2.1",
+    "merge": "^2.1.1",
     "node-svn-ultimate": "^1.2.0",
     "node-version-compare": "^1.0.2",
     "normalize.css": "^8.0.1",
