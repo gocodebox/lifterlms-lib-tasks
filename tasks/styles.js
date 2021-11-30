@@ -5,7 +5,7 @@ module.exports = function( gulp, config ) {
     ,         maps = require( 'gulp-sourcemaps' )
     ,         pump = require( 'pump' )
     ,       rename = require( 'gulp-rename' )
-    ,         sass = require( 'gulp-sass' )
+    ,         sass = require( 'gulp-sass' )( require( 'sass' ) )
     ,         path = require( 'path' )
   ;
 
