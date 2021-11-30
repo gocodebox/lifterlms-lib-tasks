@@ -17,7 +17,7 @@ module.exports = function( gulp, config ) {
         // Unminified.
         maps.init(),
         sass( {
-          outputStyle: 'nested',
+          outputStyle: 'expanded',
         } ),
         autoprefixer( config.styles.autoprefixer ),
         maps.write( '../maps/css', { destPath: config.styles.dest } ),
