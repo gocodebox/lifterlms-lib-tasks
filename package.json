@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/gocodebox/lifterlms-lib-tasks#readme",
   "dependencies": {
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-checktextdomain": "^2.2.0",
     "gulp-cli": "^2.3.0",
