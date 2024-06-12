@@ -20,7 +20,7 @@
     "gulp": "^5.0.0",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-checktextdomain": "^2.2.0",
-    "gulp-cli": "^2.3.0",
+    "gulp-cli": "^3.0.0",
     "gulp-if": "^3.0.0",
     "gulp-ignore": "^3.0.0",
     "gulp-include": "^2.4.1",
